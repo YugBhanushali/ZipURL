@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+  background-color: white;
+}
+/* solid 4px rgba(0, 125, 250, 0.6) */
+/* .longUrl:focus{
+  outline: 4px solid rgba(0, 125, 250, 0.6);
+  outline-offset: 1px;
+} */
