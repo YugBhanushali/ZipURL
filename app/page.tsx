@@ -10,6 +10,7 @@ import { RotatingLines } from 'react-loader-spinner';
 import { CheckIcon, CloseIcon, InfoIcon } from '@chakra-ui/icons';
 import InfoPopover from '@/components/InfoPopover';
 import ShortLink from '@/components/ShortLink';
+import NameLoading from '@/components/NameLoading';
 
 
 
@@ -19,9 +20,8 @@ export default function Home() {
   const [currentUrlData, setCurrentUrlData] = useState<urlData>();
   const [outlineCheck, setOutlineCheck] = useState('none');
   const [availableColour, setAvailableColour] = useState<string>('none');
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<string>('none');
   const [resultLoading, setResultLoading] = useState<boolean>(false);
-  const [initialLoad, setInitialLoad] = useState<boolean>(true);
   const toast = useToast();
    
 
@@ -50,7 +50,8 @@ export default function Home() {
     setResultLoading(true);
     let url1:urlData = {
       url:`${longUrl}`,
-      short_url: `${availableColour === 'none' ? ((shortUrl==='' || shortUrl.length >=10) ? nanoid(7) : shortUrl) : nanoid(7)}`,
+      // short_url: `${availableColour === 'none' ? ((shortUrl==='' || shortUrl.length >=10) ? nanoid(7) : shortUrl) : nanoid(7)}`,
+      short_url: `${loading === 'right' ? ((shortUrl==='' || shortUrl.length >=10) ? nanoid(7) : shortUrl) : nanoid(7)}`,
       created_at: new Date(),
       clicks:0
     }
@@ -94,40 +95,34 @@ export default function Home() {
 
   const checkAvailableName = async (name:string) => {
     
-    setLoading(true);
-    try {
-      let { data: URLs, error } = await supabase
-      .from('URLs')
-      .select('*')
-      .eq('short_url', name)
-      .single();
-
-      if(URLs){
-        setAvailableColour('red');
-        console.log(URLs,'URLs');
-      }
-      else{
-        setAvailableColour('none');
-        console.log(URLs,'URLs');
-      }
-      setLoading(false);
-      
-
-    } catch (error) {
-      console.error(error);
+    if(name.length === 0){
+      setLoading('none');
     }
-    finally{
-      setLoading(false);
+    else{
+      setLoading('loading');
+
+      try {
+        let { data: URLs, error } = await supabase
+        .from('URLs')
+        .select('*')
+        .eq('short_url', name)
+        .single();
+  
+        if(URLs){
+          setLoading('wrong');
+        }
+        else{
+          setLoading('right');
+        }
+
+      } catch (error) {
+        console.error(error);
+      }
     }
+
   }
 
   useEffect(() => {
-    if(shortUrl.length === 0){
-      setInitialLoad(true);
-    }
-    else{
-      setInitialLoad(false);
-    }
     checkAvailableName(shortUrl);
     urlValidation(longUrl);
   }, [longUrl,outlineCheck,shortUrl]);
@@ -173,32 +168,13 @@ export default function Home() {
                   roundedLeft={'none'}
                   />
                 <InputRightElement>
-                {
-                initialLoad === true
-                ?
-                  <></>
-                :
-                  loading === true
-                  ? 
-                    <RotatingLines
-                      strokeColor="grey"
-                      strokeWidth="3"
-                      animationDuration="1"
-                      width="26"
-                      visible={true}
-                    />
-                  :
-                    availableColour === 'none' ?
-                    <CheckIcon color={'green.400'} />
-                    :
-                    <CloseIcon color={'red.400'} />
-                }
+              
+                {NameLoading(loading)}
                 </InputRightElement>
               </InputGroup>
             </div>
           </div>
 
-          {/* <InfoIcon color={'black'} className='ml-2' h={'15px'} w={'15px'} /> */}
           <InfoPopover/>
         </div>
 
@@ -216,12 +192,12 @@ export default function Home() {
         </div>
       </form>
       {resultLoading === true ?
-        <div className='mt-[30px] flex justify-center items-center'>
+        <div className='mt-[40px] flex justify-center items-center'>
           <RotatingLines
             strokeColor="grey"
             strokeWidth="3"
             animationDuration="1"
-            width="26"
+            width="36"
             visible={true}
           />
         </div>

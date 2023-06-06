@@ -1,5 +1,5 @@
-import Navbar from '@/components/Navbar'
-import './globals.css'
+
+import '../globals.css'
 import { Roboto_Mono } from 'next/font/google'
 
 const robotoMono = Roboto_Mono({
@@ -21,7 +21,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${robotoMono.className} text-black`}>
-        <Navbar />
         {children}
       </body>
     </html>
