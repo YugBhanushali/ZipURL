@@ -11,6 +11,8 @@ import { CheckIcon, CloseIcon, InfoIcon } from '@chakra-ui/icons';
 import InfoPopover from '@/components/InfoPopover';
 import ShortLink from '@/components/ShortLink';
 import NameLoading from '@/components/NameLoading';
+import { debounce } from 'lodash'
+
 
 
 
@@ -102,13 +104,9 @@ export default function Home() {
       setLoading('loading');
 
       try {
-        let { data: URLs, error } = await supabase
-        .from('URLs')
-        .select('*')
-        .eq('short_url', name)
-        .single();
-  
-        if(URLs){
+        const res = await fetch(`http://localhost:3000/api/search?url=${name}`);
+        const {urls , available} = await res.json();
+        if(available === false){
           setLoading('wrong');
         }
         else{
@@ -119,11 +117,12 @@ export default function Home() {
         console.error(error);
       }
     }
-
   }
 
+  const debounceCheckAvailableName = debounce(checkAvailableName, 200);
+
   useEffect(() => {
-    checkAvailableName(shortUrl);
+    debounceCheckAvailableName(shortUrl);
     urlValidation(longUrl);
   }, [longUrl,outlineCheck,shortUrl]);
     
@@ -164,7 +163,7 @@ export default function Home() {
                   type="text"
                   placeholder='github'
                   value={shortUrl}
-                  onChange={(e) => setShortUrl(e.target.value)}
+                  onChange={(e) => {setShortUrl(e.target.value)}}
                   roundedLeft={'none'}
                   />
                 <InputRightElement>
