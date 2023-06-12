@@ -2,19 +2,16 @@
 
 import TagLines from '@/components/TagLines';
 import { nanoid } from 'nanoid';
-import { useEffect, useState } from 'react';
+import { use, useCallback, useEffect, useState } from 'react';
 import isUrl from 'is-url';
 import { ChakraProvider, Input, InputGroup, InputRightElement, useToast } from '@chakra-ui/react';
-import { RotatingLines } from 'react-loader-spinner';
 import InfoPopover from '@/components/InfoPopover';
-import ShortLink from '@/components/ShortLink';
 import NameLoading from '@/components/NameLoading';
-import { debounce } from 'lodash'
+import { debounce } from '@/utils/Functions';
 import Animation from '@/components/Animation';
 import { getURLs, setURLs } from '@/utils/localStorage';
-import {AnimatePresence, motion } from 'framer-motion';
 import { UrlContext } from '@/Context/UrlContext';
-
+import AllLink from '@/components/AllLink';
 
 
 
@@ -55,7 +52,6 @@ export default function Home() {
     setResultLoading(true);
     let url1:urlData = {
       url:`${longUrl}`,
-      // short_url: `${availableColour === 'none' ? ((shortUrl==='' || shortUrl.length >=10) ? nanoid(7) : shortUrl) : nanoid(7)}`,
       short_url: `${loading === 'right' ? ((shortUrl==='' || shortUrl.length >=10) ? nanoid(7) : shortUrl) : nanoid(7)}`,
       created_at: new Date(),
       clicks:0
@@ -83,6 +79,7 @@ export default function Home() {
           setLongUrl('');
           setShortUrl('');
           setAvailableColour('none');
+          setLoading('none');
           toast({
             title: `URL Zipped successfully`,
             status: 'success',
@@ -90,6 +87,7 @@ export default function Home() {
             duration: 3000,
             position: 'top'
           });
+          // adding info to local storage
           setURLs(url1.url,url1.short_url);
           setResultLoading(false);
         }
@@ -120,38 +118,38 @@ export default function Home() {
   };
 
 
-  const checkAvailableName = async (name:string) => {
-    
+  const checkShortUrlName = debounce((name:string) => {
     if(name.length === 0){
       setLoading('none');
     }
     else{
       setLoading('loading');
-
-      try {
-        const res = await fetch(`http://localhost:3000/api/search?url=${name}`);
-        const {urls , available} = await res.json();
-        if(available === false){
-          setLoading('wrong');
-        }
-        else{
-          setLoading('right');
-        }
-
+      try{
+        fetch(`http://localhost:3000/api/search?url=${name}`)
+            .then(res => res.json())
+            .then(data => {
+              if(data.available === false){
+                setLoading('wrong');
+              }
+              else{
+                setLoading('right');
+              }
+            });
       } catch (error) {
         console.error(error);
-      }
+        }
     }
-  }
+    }, 500);
 
-  const debounceCheckAvailableName = debounce(checkAvailableName, 500);
+    //use to make less api calls to check availability of short url
+    const optimizedCheck = useCallback(debounce(checkShortUrlName), []);
+
 
   useEffect(() => {
 
     let tempData = getURLs().reverse();
     setUrlData(tempData);
         
-    debounceCheckAvailableName(shortUrl);
     urlValidation(longUrl);
   }, [longUrl,outlineCheck,shortUrl]);
     
@@ -192,7 +190,7 @@ export default function Home() {
                   type="text"
                   placeholder='github'
                   value={shortUrl}
-                  onChange={(e) => {setShortUrl(e.target.value)}}
+                  onChange={(e) => {setShortUrl(e.target.value);optimizedCheck(e.target.value)}}
                   roundedLeft={'none'}
                   />
                 <InputRightElement>
@@ -219,51 +217,12 @@ export default function Home() {
           </button>
         </div>
       </form>
-      {resultLoading === true ?
-        <div className='mt-[40px] flex justify-center items-center'>
-          <RotatingLines
-            strokeColor="grey"
-            strokeWidth="3"
-            animationDuration="1"
-            width="36"
-            visible={true}
-          />
-        </div>
-      : 
-      <>
-      {/* make such animation for ShortLink whick looks like all link fall from top to bottom */}
+      
       <UrlContext.Provider value={{urlData,setUrlData,resultLoading,setResultLoading}}>
-      <AnimatePresence>
-        <motion.div
-          className='mt-[40px] flex flex-col justify-center items-center'
-          initial={{opacity:0}}
-          animate={{opacity:1}}
-          transition={{duration:0.5}}
-        >
-          {
-            ( urlData &&
-              urlData.map((eachUrl:any)=>{
-                return(
-                  <motion.div
-                    key={eachUrl.short_url}
-                    initial={{ opacity: 0, y: -50, scale: 0.3 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 100, scale: 0.5 }}
-                    transition={{ duration: 0.5 ,type:'spring', stiffness: 50}}
-                    style={{ listStyle: "none" }}
-                  >
-                    <ShortLink shortUrl={eachUrl.short_url} longUrl={eachUrl.url} key={eachUrl.short_url}/>
-                  </motion.div>
-                )
-              })
-            )
-          }
-        </motion.div>
-        </AnimatePresence>
-        </UrlContext.Provider>
-        </>
-      }
-
+        <AllLink/>
+      </UrlContext.Provider>
+      
+      {/* animation component */}
       <Animation/>
 
     </div>

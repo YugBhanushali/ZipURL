@@ -1,15 +1,17 @@
 'use client'
+
 import { UrlContext } from '@/Context/UrlContext';
 import { removeURL } from '@/utils/localStorage';
 import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Toast, useDisclosure, useToast } from '@chakra-ui/react'
-import React, { Children, use, useContext, useEffect } from 'react'
+import React, {useContext, useEffect } from 'react'
 import { MdOutlineDeleteOutline } from 'react-icons/md';
 
 const ModalComp = ({shortUrl}:{shortUrl:string}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const {urlData, setUrlData} = useContext<any>(UrlContext);
+  const {urlData, setUrlData, resultLoading, setResultLoading} = useContext<any>(UrlContext);
   const toast = useToast();
   const handleDelete = async () => {
+      setResultLoading(true);
       const res = await fetch(`http://localhost:3000/api/url/?short_url=${shortUrl}`,{
         method:'DELETE',
       });
@@ -24,6 +26,7 @@ const ModalComp = ({shortUrl}:{shortUrl:string}) => {
         position: 'top'
       });
       setUrlData(tempUrls);
+      setResultLoading(false);
 }
 
   useEffect(() => {

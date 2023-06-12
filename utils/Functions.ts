@@ -6,3 +6,17 @@ export function sliceURL(url: string) {
     }
     return url;
 }
+
+const debounce = (func: (...args: any[]) => void) => {
+    let timer: NodeJS.Timeout;
+    return function (...args: any[]) {
+      const context = this;
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => {
+        timer = null;
+        func.apply(context, args);
+      }, 500);
+    };
+  };
+
+export {debounce};
