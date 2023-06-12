@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { supabase } from '@/utils/supabase';
 import { formatDistanceToNow } from 'date-fns';
 import { motion } from 'framer-motion';
+import Analytics from '@/components/Analytics';
 
 export default function Home() {
     const [shortLink, setShortLink] = useState('');
@@ -16,15 +17,14 @@ export default function Home() {
     const [showResults, setShowResults] = useState<boolean>(false);
     const toast = useToast();
 
+
+
     const urlValidation = (url:string) => {
         if(url.length === 0) {
             setUrlCheck(true);
             return false;
         }
-        if (isUrl(url)) {
-            console.log(new URL(url).pathname.split('/').length);
-            console.log(new URL(url).pathname.split('/'));
-            
+        if (isUrl(url)) {            
             if(new URL(url).hostname === 'localhost' && new URL(url).protocol === 'http:' && new URL(url).pathname.split('/')[1].length > 0){
                 setUrlCheck(true);
             }
@@ -38,19 +38,32 @@ export default function Home() {
     }
 
     const fetchUrlData = async () => {
-        const {data: URLs, error} = await supabase
-        .from('URLs')
-        .select('*')
-        .eq('short_url', new URL(shortLink).pathname.split('/')[1])
-        .single();
+        const tempShortLink = new URL(shortLink).pathname.split('/')[1];
+        console.log(tempShortLink);
+        const res = await fetch(`http://localhost:3000/api/url?search=${tempShortLink}`);
 
-        if(URLs){
-            setUrlData(URLs);
+        const data = await res.json();
+        console.log(data?.urls);
+        if(data?.available === true){
+            setUrlData(data?.urls);
             setLoading(false);
         }
         else{
             setLoading(false);
         }
+        // const {data: URLs, error} = await supabase
+        // .from('URLs')
+        // .select('*')
+        // .eq('short_url', new URL(shortLink).pathname.split('/')[1])
+        // .single();
+
+        // if(URLs){
+        //     setUrlData(URLs);
+        //     setLoading(false);
+        // }
+        // else{
+        //     setLoading(false);
+        // }
     }
 
     const handleSubmit = (e:any) => {

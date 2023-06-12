@@ -8,6 +8,7 @@ import { RotatingLines } from 'react-loader-spinner';
 import { formatDistanceToNow } from 'date-fns';
 import { motion } from 'framer-motion';
 
+
 //get me the url param
 export default function Home() {
     const searchParams = useSearchParams();
@@ -17,19 +18,31 @@ export default function Home() {
     const [urlData, setUrlData] = useState<any>('');
 
     const fetchUrlData = async (search:string) => {
-        const {data: URL, error} = await supabase
-        .from('URLs')
-        .select('*')
-        .eq('short_url', search)
-        .single();
 
-        if(URL){
-            setUrlData(URL);
+        const res = await fetch(`http://localhost:3000/api/url?search=${search}`);
+
+        const data = await res.json();
+        console.log(data?.urls);
+        if(data?.available === true){
+            setUrlData(data?.urls);
         }
         else{
             setUrlData(null);
         }
         setLoading(false);
+        // const {data: URL, error} = await supabase
+        // .from('URLs')
+        // .select('*')
+        // .eq('short_url', search)
+        // .single();
+
+        // if(URL){
+        //     setUrlData(URL);
+        // }
+        // else{
+        //     setUrlData(null);
+        // }
+        // setLoading(false);
     }
 
     useEffect(() => {

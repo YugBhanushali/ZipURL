@@ -47,10 +47,10 @@ const Analytics = (query:string) => {
             urlData 
             ?
                 <>
-                    <p>Long url: {urlData.url}</p>
-                    <p>Short url: {urlData.short_url}</p>
-                    <p>Number of clicks: {urlData.clicks}</p>
-                    <p>Created at: {urlData.created_at}</p>
+                    <p>Long url: {urlData?.url}</p>
+                    <p>Short url: {urlData?.short_url}</p>
+                    <p>Number of clicks: {urlData?.clicks}</p>
+                    <p>Created at: {urlData?.created_at}</p>
                 </>
             :
                 <>

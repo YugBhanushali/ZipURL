@@ -16,32 +16,54 @@ export default function Home() {
     const pathname = usePathname();
 
     console.log(pathname);
-    const urlCode = pathname.replace('/','');
+    const short_url_id = pathname.replace('/','');
 
     const fetchData = async () => {
         try {
-            let { data: URLs, error } = await supabase
-                .from('URLs')
-                .select('*')
-                .eq('short_url', urlCode)
-                .single();
-            console.log(URLs);
-            if (URLs) {
-                //update clicks
-                const clicks = URLs.clicks + 1;
-                let { data: URLUpdated, error } = await supabase
-                    .from('URLs')
-                    .update({ clicks: clicks })
-                    .eq('short_url', urlCode)
-                    .single();
 
+            const res = await fetch(`http://localhost:3000/api/url`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },    
+                body: JSON.stringify({ short_url_id })
+            });
+
+            const data = await res.json();
+            console.log(data);
+
+            if (data && res.status === 200) {
                 setLoading(false);
-                router.push(URLs.url);
-            }
+                console.log(data);
+                router.push(data?.url?.url);    
+            }   
             else {
                 setLoading(false);
                 setUrlChecker(true);
-            }
+            }         
+
+            // let { data: URLs, error } = await supabase
+            //     .from('URLs')
+            //     .select('*')
+            //     .eq('short_url', short_url_id)
+            //     .single();
+            // console.log(URLs);
+            // if (URLs) {
+            //     //update clicks
+            //     const clicks = URLs.clicks + 1;
+            //     let { data: URLUpdated, error } = await supabase
+            //         .from('URLs')
+            //         .update({ clicks: clicks })
+            //         .eq('short_url', short_url_id)
+            //         .single();
+
+            //     setLoading(false);
+            //     router.push(URLs.url);
+            // }
+            // else {
+            //     setLoading(false);
+            //     setUrlChecker(true);
+            // }
         } catch (error) {
             console.error(error);
         }

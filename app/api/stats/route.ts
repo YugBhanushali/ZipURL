@@ -1,7 +1,7 @@
 
 
 export async function GET(req: Request){
-    const pathName = new URL(req.url);
-    console.log(pathName.searchParams.get('shorturl'));
+    const res = await fetch('https://codetoimg.vercel.app');
+    console.log(res);
     return new Response('Hello World');
 }

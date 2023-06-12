@@ -1,17 +1,19 @@
 'use client'
 
 import TagLines from '@/components/TagLines';
-import { supabase } from '@/utils/supabase';
 import { nanoid } from 'nanoid';
 import { useEffect, useState } from 'react';
 import isUrl from 'is-url';
-import { ChakraProvider, CheckboxIcon, Input, InputGroup, InputLeftElement, InputRightElement, Stack, useToast } from '@chakra-ui/react';
+import { ChakraProvider, Input, InputGroup, InputRightElement, useToast } from '@chakra-ui/react';
 import { RotatingLines } from 'react-loader-spinner';
-import { CheckIcon, CloseIcon, InfoIcon } from '@chakra-ui/icons';
 import InfoPopover from '@/components/InfoPopover';
 import ShortLink from '@/components/ShortLink';
 import NameLoading from '@/components/NameLoading';
 import { debounce } from 'lodash'
+import Animation from '@/components/Animation';
+import { getURLs, setURLs } from '@/utils/localStorage';
+import {AnimatePresence, motion } from 'framer-motion';
+import { UrlContext } from '@/Context/UrlContext';
 
 
 
@@ -24,6 +26,7 @@ export default function Home() {
   const [availableColour, setAvailableColour] = useState<string>('none');
   const [loading, setLoading] = useState<string>('none');
   const [resultLoading, setResultLoading] = useState<boolean>(false);
+  const [urlData, setUrlData] = useState<any>([]);
   const toast = useToast();
    
 
@@ -61,23 +64,45 @@ export default function Home() {
     try {
 
       if(urlValidation(longUrl)){
-        const store = await supabase
-        .from('URLs')
-        .insert([
-          url1
-        ])
-        setCurrentUrlData(url1);
-        setLongUrl('');
-        setShortUrl('');
-        setAvailableColour('none');
-        toast({
-          title: `URL Zipped successfully`,
-          status: 'success',
-          isClosable: true,
-          duration: 3000,
-          position: 'top'
+        const res = await fetch(`http://localhost:3000/api/url`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            url: url1.url,
+            short_url: url1.short_url,
+            created_at: url1.created_at,
+            clicks: url1.clicks
+          })
         });
-        setResultLoading(false);
+
+        if(res.ok){
+          const data = await res.json();
+          setCurrentUrlData(url1);
+          setLongUrl('');
+          setShortUrl('');
+          setAvailableColour('none');
+          toast({
+            title: `URL Zipped successfully`,
+            status: 'success',
+            isClosable: true,
+            duration: 3000,
+            position: 'top'
+          });
+          setURLs(url1.url,url1.short_url);
+          setResultLoading(false);
+        }
+        else{
+          toast({
+            title: `Please enter a valid URL`,
+            status: 'error',
+            isClosable: true,
+            duration: 3000,
+            position: 'top'
+          });
+          setResultLoading(false);
+        }
       }
       else{
         toast({
@@ -119,16 +144,20 @@ export default function Home() {
     }
   }
 
-  const debounceCheckAvailableName = debounce(checkAvailableName, 200);
+  const debounceCheckAvailableName = debounce(checkAvailableName, 500);
 
   useEffect(() => {
+
+    let tempData = getURLs().reverse();
+    setUrlData(tempData);
+        
     debounceCheckAvailableName(shortUrl);
     urlValidation(longUrl);
   }, [longUrl,outlineCheck,shortUrl]);
     
   return (
     <ChakraProvider>
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="mainpage flex min-h-screen flex-col items-center justify-between p-24">
       <div className='flex flex-col justify-center items-center'>
       <TagLines/>
       <form onSubmit={handleSubmit}>
@@ -200,11 +229,42 @@ export default function Home() {
             visible={true}
           />
         </div>
-      :
-        currentUrlData && (
-          <ShortLink shortUrl={currentUrlData.short_url} />
-        )
+      : 
+      <>
+      {/* make such animation for ShortLink whick looks like all link fall from top to bottom */}
+      <UrlContext.Provider value={{urlData,setUrlData,resultLoading,setResultLoading}}>
+      <AnimatePresence>
+        <motion.div
+          className='mt-[40px] flex flex-col justify-center items-center'
+          initial={{opacity:0}}
+          animate={{opacity:1}}
+          transition={{duration:0.5}}
+        >
+          {
+            ( urlData &&
+              urlData.map((eachUrl:any)=>{
+                return(
+                  <motion.div
+                    key={eachUrl.short_url}
+                    initial={{ opacity: 0, y: -50, scale: 0.3 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 100, scale: 0.5 }}
+                    transition={{ duration: 0.5 ,type:'spring', stiffness: 50}}
+                    style={{ listStyle: "none" }}
+                  >
+                    <ShortLink shortUrl={eachUrl.short_url} longUrl={eachUrl.url} key={eachUrl.short_url}/>
+                  </motion.div>
+                )
+              })
+            )
+          }
+        </motion.div>
+        </AnimatePresence>
+        </UrlContext.Provider>
+        </>
       }
+
+      <Animation/>
 
     </div>
     </main>

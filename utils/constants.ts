@@ -11,4 +11,59 @@ const tagLineList = [
     "Unlock the Potential of Short Links for Marketing and Campaigns"
 ];
 
-export { tagLineList}
+const ZipURLExapmle = [
+    {
+        longURL:"https://www.google.com/../../...?....",
+        shortURL:"https://zipurl.vercel.app/google",
+    },
+    {
+        longURL:"https://www.facebook.com/../../...?....",
+        shortURL:"https://zipurl.vercel.app/facebook",
+    },
+    {
+        longURL:"https://www.youtube.com/../../...?....",
+        shortURL:"https://zipurl.vercel.app/youtube",
+    },
+    {
+        longURL:"https://www.youtube.com/../../...?....",
+        shortURL:"https://zipurl.vercel.app/designYT",
+    },
+    {
+        longURL:"https://www.youtube.com/../../...?....",
+        shortURL:"https://zipurl.vercel.app/codingYT",
+    },
+    {
+        longURL:"https://www.instagram.com/../../...?....",
+        shortURL:"https://zipurl.vercel.app/instagram",
+    },
+    {
+        longURL:"https://www.twitter.com/../../...?....",
+        shortURL:"https://zipurl.vercel.app/twitter",
+    },
+    {
+        longURL:"https://www.linkedin.com/../../...?....",
+        shortURL:"https://zipurl.vercel.app/linkedin",
+    },
+    {
+        longURL:"https://www.pinterest.com/../../...?....",
+        shortURL:"https://zipurl.vercel.app/pinterest",
+    },
+    {
+        longURL:"https://www.linkedin.com/../../...?....",
+        shortURL:"https://zipurl.vercel.app/myprofile",
+    },
+    {
+        longURL:"https://medium.com/../../...?....",
+        shortURL:"https://zipurl.vercel.app/medium",
+    },
+    {
+        longURL:"https://www.quora.com/../../...?....",
+        shortURL:"https://zipurl.vercel.app/quora",
+    },
+    {
+        longURL:"https://medium.com/../../...?....",
+        shortURL:"https://zipurl.vercel.app/blogOnMarketing",
+    },
+]
+
+export { tagLineList, ZipURLExapmle}
