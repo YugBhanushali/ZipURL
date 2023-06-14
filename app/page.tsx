@@ -1,17 +1,20 @@
 'use client'
 
 import TagLines from '@/components/TagLines';
-import { nanoid } from 'nanoid';
+import { nanoid,customAlphabet } from 'nanoid';
 import { use, useCallback, useEffect, useState } from 'react';
 import isUrl from 'is-url';
-import { ChakraProvider, Input, InputGroup, InputRightElement, useToast } from '@chakra-ui/react';
+import { ChakraProvider, Input, InputGroup, InputRightElement, useToast,useMediaQuery } from '@chakra-ui/react';
 import InfoPopover from '@/components/InfoPopover';
 import NameLoading from '@/components/NameLoading';
-import { debounce } from '@/utils/Functions';
+import { UrlCheckerFun, debounce, generateRandomString,Toster } from '@/utils/Functions';
 import Animation from '@/components/Animation';
 import { getURLs, setURLs } from '@/utils/localStorage';
 import { UrlContext } from '@/Context/UrlContext';
 import AllLink from '@/components/AllLink';
+import { URL_OF_WEBSITE } from '@/utils/constants';
+import LinkLogo from '../public/assets/Link.svg'
+import Image from 'next/image';
 
 
 
@@ -24,43 +27,25 @@ export default function Home() {
   const [loading, setLoading] = useState<string>('none');
   const [resultLoading, setResultLoading] = useState<boolean>(false);
   const [urlData, setUrlData] = useState<any>([]);
+  const [isMobileView] = useMediaQuery('(max-width: 768px)');
   const toast = useToast();
    
-
-  const urlValidation = (url:string) => {
-    if(url.length === 0) {
-      setOutlineCheck('none');
-      return false; 
-    }
-    if (isUrl(url)) {
-      if(new URL(url).hostname.split('.').length > 1 && new URL(url).hostname.split('.')[1].length > 0){
-        setOutlineCheck('none');
-        return true;
-      }
-      else{
-        setOutlineCheck('4px solid red');
-        return false;
-      }
-    } else {
-      setOutlineCheck('4px solid red');
-      return false;
-    }
-  }
-
+  
   const handleSubmit = async (e:any) => {
     e.preventDefault();
     setResultLoading(true);
     let url1:urlData = {
       url:`${longUrl}`,
-      short_url: `${loading === 'right' ? ((shortUrl==='' || shortUrl.length >=10) ? nanoid(7) : shortUrl) : nanoid(7)}`,
+      short_url: `${loading === 'right' ? ((shortUrl==='' || shortUrl.length >=10) ? generateRandomString(7) : shortUrl) : generateRandomString(7)}`,
       created_at: new Date(),
       clicks:0
     }
 
     try {
 
-      if(urlValidation(longUrl)){
-        const res = await fetch(`http://localhost:3000/api/url`, {
+      //the UrlCheckerFun is a function that checks if the url is valid or not
+      if( UrlCheckerFun(longUrl).isUrlCorrect ){
+        const res = await fetch(`${URL_OF_WEBSITE}api/url`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -119,13 +104,14 @@ export default function Home() {
 
 
   const checkShortUrlName = debounce((name:string) => {
+    // Toster({message:"Checking availability of short url",typeOf:'success',positionOfToast:"top",toast:toast});
     if(name.length === 0){
       setLoading('none');
     }
     else{
       setLoading('loading');
       try{
-        fetch(`http://localhost:3000/api/search?url=${name}`)
+        fetch(`${URL_OF_WEBSITE}api/search?url=${name}`)
             .then(res => res.json())
             .then(data => {
               if(data.available === false){
@@ -149,8 +135,10 @@ export default function Home() {
 
     let tempData = getURLs().reverse();
     setUrlData(tempData);
-        
-    urlValidation(longUrl);
+
+    
+    //the UrlCheckerFun is checking weather the url is valid or not and according to that it is setting the outline of the input field
+    setOutlineCheck(UrlCheckerFun(longUrl).OuterColour);
   }, [longUrl,outlineCheck,shortUrl]);
     
   return (
@@ -158,14 +146,14 @@ export default function Home() {
     <main className="mainpage flex min-h-screen flex-col items-center justify-between p-24">
       <div className='flex flex-col justify-center items-center'>
       <TagLines/>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className=''>
         <input
           type="url"
           value={longUrl}
           onChange={(e) => setLongUrl(e.target.value)}
-          className={`w-[499px] h-[40px] bg-white px-4 py-2 focus:outline-4 focus:outline-offset-[3px] ${outlineCheck === 'none' ? `focus:outline-[#007dfa99]` : `focus:outline-red-500`} focus:outline border-none`}
+          className={`w-[315px] h-[30px] sm:w-[499px] sm:h-[40px] text-[12px] sm:text-[16px] bg-white px-4 py-2 focus:outline-4 focus:outline-offset-[1px] ${outlineCheck === 'none' ? `focus:outline-[#007dfa99]` : `focus:outline-red-500`} focus:outline border-[2px] sm:border-none `}
           style={{
-            boxShadow:'0px 0.5px 8px -1px #000000',
+            boxShadow:{isMobileView} ? '0px 0.5px 8px -1px #000000' : '0px 0.5px 8px -1px #000000',
             borderRadius:'10px',
           }}
           placeholder='https://github.com/supabase/supabase-flutter'
@@ -173,16 +161,16 @@ export default function Home() {
         />
         
         
-        <div className='mt-[30px] flex items-center'>
+        <div className='mt-[30px] sm:w-[497px]  flex items-center'>
           <div 
           style={{
             boxShadow:'0px 0.5px 8px -1px #000000',
             borderRadius:'10px',
           }}
-          className=' flex justify-start items-center h-[42px] bg-white border-black border-[3px]'
+          className=' flex justify-start items-center h-[32px] sm:h-[42px] bg-white border-black border-[3px]'
           >
-            <div className='h-full border-r-0 border-black bg-black px-3 py-2 justify-center items-center'>
-              <p className='text-white'>http://localhost:3000/</p>
+            <div className='h-full border-r-0 border-black bg-black px-3 py-2 flex justify-center items-center'>
+              <p className='text-white text-[11px] sm:text-[16px]'>{URL_OF_WEBSITE}</p>
             </div>
             <div className='h-full w-full flex justify-center items-center'>
               <InputGroup border={'none'} >
@@ -192,8 +180,10 @@ export default function Home() {
                   value={shortUrl}
                   onChange={(e) => {setShortUrl(e.target.value);optimizedCheck(e.target.value)}}
                   roundedLeft={'none'}
+                  fontSize={isMobileView ? '10px' : '16px'}
+                  h={isMobileView ? '30px' : '42px'}
                   />
-                <InputRightElement>
+                <InputRightElement display={'flex'} alignContent={'center'} h={'full'}>
               
                 {NameLoading(loading)}
                 </InputRightElement>
@@ -205,16 +195,11 @@ export default function Home() {
         </div>
 
         <div className='mt-[30px] flex justify-center items-center'>
-          <button 
-            className='h-[42px] ml-4 bg-white px-3 py-2 hover:border-black border-[2px] border-black font-bold' 
-            type="submit"
-            style={{
-              boxShadow:'0px 0.5px 8px -1px #000000',
-              borderRadius:'10px',
-            }}
-          >
+          <button type="submit" className="text-black flex items-center  hover:text-white border-2 border-black hover:bg-black focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-[11px] sm:text-[16px] px-5 py-1.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-black dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">
+            <Image src={LinkLogo} alt="zip it"  width={isMobileView ? 14 : 20} height={isMobileView ? 14 : 20} className='mr-2'/>
               Zip it!
           </button>
+          
         </div>
       </form>
       

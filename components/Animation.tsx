@@ -16,7 +16,7 @@ const Animation = () => {
     }, []);
 
   return (
-    <div className='flex justify-center items-center mt-[120px] gap-2'>
+    <div className='flex sm:flex-row flex-col justify-center items-center mt-[120px] text-[12px] sm:text-[15px] gap-2'>
         <div className='flex justify-center items-center'>
             <motion.p
                 key={currentZipURL}

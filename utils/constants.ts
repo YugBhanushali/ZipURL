@@ -66,4 +66,8 @@ const ZipURLExapmle = [
     },
 ]
 
-export { tagLineList, ZipURLExapmle}
+const URL_OF_WEBSITE = "http://localhost:3000/"
+// http://192.168.0.107:3000/
+// https://zipurl.vercel.app/
+
+export { tagLineList, ZipURLExapmle, URL_OF_WEBSITE}

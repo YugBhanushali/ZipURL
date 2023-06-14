@@ -4,10 +4,12 @@ import { useRouter,usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { RotatingLines } from "react-loader-spinner";
 import Link from "next/link";
-import { supabase } from "@/utils/supabase";
+import { URL_OF_WEBSITE } from "@/utils/constants";
+
 
 
 export default function Home() {
+
 
     const [urlChecker, setUrlChecker] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
@@ -21,7 +23,7 @@ export default function Home() {
     const fetchData = async () => {
         try {
 
-            const res = await fetch(`http://localhost:3000/api/url`, {
+            const res = await fetch(`${URL_OF_WEBSITE}api/url`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -35,35 +37,15 @@ export default function Home() {
             if (data && res.status === 200) {
                 setLoading(false);
                 console.log(data);
-                router.push(data?.url?.url);    
+                // router.push(data?.url?.url);    
+                window.location.href = data?.url?.url;
             }   
             else {
                 setLoading(false);
                 setUrlChecker(true);
             }         
 
-            // let { data: URLs, error } = await supabase
-            //     .from('URLs')
-            //     .select('*')
-            //     .eq('short_url', short_url_id)
-            //     .single();
-            // console.log(URLs);
-            // if (URLs) {
-            //     //update clicks
-            //     const clicks = URLs.clicks + 1;
-            //     let { data: URLUpdated, error } = await supabase
-            //         .from('URLs')
-            //         .update({ clicks: clicks })
-            //         .eq('short_url', short_url_id)
-            //         .single();
-
-            //     setLoading(false);
-            //     router.push(URLs.url);
-            // }
-            // else {
-            //     setLoading(false);
-            //     setUrlChecker(true);
-            // }
+            
         } catch (error) {
             console.error(error);
         }

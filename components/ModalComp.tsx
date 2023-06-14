@@ -2,13 +2,15 @@
 
 import { UrlContext } from '@/Context/UrlContext';
 import { removeURL } from '@/utils/localStorage';
-import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Toast, useDisclosure, useToast } from '@chakra-ui/react'
+import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Toast, useDisclosure, useToast,useMediaQuery } from '@chakra-ui/react'
+import { is } from 'date-fns/locale';
 import React, {useContext, useEffect } from 'react'
 import { MdOutlineDeleteOutline } from 'react-icons/md';
 
 const ModalComp = ({shortUrl}:{shortUrl:string}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {urlData, setUrlData, resultLoading, setResultLoading} = useContext<any>(UrlContext);
+  const [isMobileView] = useMediaQuery("(max-width: 768px)");
   const toast = useToast();
   const handleDelete = async () => {
       setResultLoading(true);
@@ -34,10 +36,10 @@ const ModalComp = ({shortUrl}:{shortUrl:string}) => {
   return (
     <>
       <MdOutlineDeleteOutline
-          height={'28px'}
-          width={'28px'}
+          height={isMobileView ? '10px' : '28px'}
+          width={isMobileView ? '10px' : '28px'}
           color='black'
-          className='cursor-pointer'
+          className='cursor-pointer sm:h-[28px] sm:w-[28px] h-[14px] w-[14px]'
           onClick={onOpen}
       />
 
