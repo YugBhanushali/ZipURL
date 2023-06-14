@@ -1,17 +1,17 @@
 'use client'
 
 import Link from 'next/link';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import { RotatingLines } from 'react-loader-spinner';
 import { formatDistanceToNow } from 'date-fns';
 import { motion } from 'framer-motion';
 import { useMediaQuery } from '@chakra-ui/react';
-import { is } from 'date-fns/locale';
 import { sliceURL } from '@/utils/Functions';
+import RotatingLinesAnimation from '@/components/ui/RotatingLinesAnimation';
 
 
-//get me the url param
+
 export default function Home() {
     const searchParams = useSearchParams();
     const querys = searchParams.get('shorturl');
@@ -48,13 +48,7 @@ export default function Home() {
       </h1>
       {
         loading ?
-            <RotatingLines
-                strokeColor="grey"
-                strokeWidth="3"
-                animationDuration="1"
-                width={isMobileView ? "24" : "46"}
-                visible={true}
-            />
+            <RotatingLinesAnimation widthOfLines={isMobileView ? "24" : "46"} />
         :
             urlData === null 
             ?

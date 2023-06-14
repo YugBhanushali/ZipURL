@@ -1,17 +1,18 @@
 'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import {GrProductHunt} from 'react-icons/gr'
 import { SiBuymeacoffee } from 'react-icons/si'
-import zipgif from '../public/assets/zipgif.gif'
 import ZipURL from '../public/assets/ZipURL.svg'
 import LinkLogo from '../public/assets/Link.svg'
 import { useMediaQuery } from '@chakra-ui/react'
-import { is } from 'date-fns/locale'
+
 
 const Navbar = () => {
-    const isMobileView = useMediaQuery("(max-width: 768px)")
+    const [isMobileView] = useMediaQuery("(max-width: 568px)")
+
 
   return (
     <div className='flex justify-center items-center'>
@@ -22,6 +23,7 @@ const Navbar = () => {
                         src={LinkLogo}
                         width={isMobileView ? 25 : 35}
                         height={isMobileView ? 25 : 35}
+
                         alt='logo'
                         className='mr-2'
                     />

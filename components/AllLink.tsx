@@ -4,13 +4,14 @@ import { UrlContext } from '@/Context/UrlContext';
 import React, { use, useContext, useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion';
 import ShortLink from './ShortLink';
-import { RotatingLines } from 'react-loader-spinner';
 import { getURLs } from '@/utils/localStorage';
-import { el } from 'date-fns/locale';
+import RotatingLinesAnimation from './ui/RotatingLinesAnimation';
+import { useMediaQuery } from '@chakra-ui/react';
 
 const AllLink = () => {
 
     const {urlData, setUrlData,resultLoading,setResultLoading} = useContext<any>(UrlContext);
+    const [isMobileView] = useMediaQuery('(max-width: 768px)');
 
     const fetchData = () => {
       let temp = getURLs().reverse();
@@ -30,13 +31,7 @@ const AllLink = () => {
     <div>
       {resultLoading === true ?
         <div className='mt-[40px] flex justify-center items-center'>
-          <RotatingLines
-            strokeColor="grey"
-            strokeWidth="3"
-            animationDuration="1"
-            width="36"
-            visible={true}
-          />
+          <RotatingLinesAnimation widthOfLines={isMobileView ? "24" : "36"} />
         </div>
       : 
       <>

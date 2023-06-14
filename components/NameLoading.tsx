@@ -4,6 +4,7 @@ import React from 'react'
 import { useMediaQuery } from '@chakra-ui/react'
 import { RotatingLines } from 'react-loader-spinner'
 import { is } from 'date-fns/locale'
+import RotatingLinesAnimation from './ui/RotatingLinesAnimation'
 
 const NameLoading = (loadingState:string) => {
     const [isMobileView] = useMediaQuery("(max-width: 768px)")
@@ -16,13 +17,7 @@ const NameLoading = (loadingState:string) => {
             : 
                 loadingState === 'loading'
                 ? 
-                    <RotatingLines
-                            strokeColor="grey"
-                            strokeWidth="3"
-                            animationDuration="1"
-                            width={isMobileView ? "15" : "26"}
-                            visible={true}
-                    />
+                    <RotatingLinesAnimation widthOfLines={isMobileView ? "15" : "26"} />
                 :
                     loadingState === 'right'
                     ?

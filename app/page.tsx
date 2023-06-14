@@ -1,13 +1,11 @@
 'use client'
 
 import TagLines from '@/components/TagLines';
-import { nanoid,customAlphabet } from 'nanoid';
 import { use, useCallback, useEffect, useState } from 'react';
-import isUrl from 'is-url';
 import { ChakraProvider, Input, InputGroup, InputRightElement, useToast,useMediaQuery } from '@chakra-ui/react';
 import InfoPopover from '@/components/InfoPopover';
 import NameLoading from '@/components/NameLoading';
-import { UrlCheckerFun, debounce, generateRandomString,Toster } from '@/utils/Functions';
+import { UrlCheckerFun, debounce, generateRandomString,Toaster, isAlphaNumeric } from '@/utils/Functions';
 import Animation from '@/components/Animation';
 import { getURLs, setURLs } from '@/utils/localStorage';
 import { UrlContext } from '@/Context/UrlContext';
@@ -65,36 +63,20 @@ export default function Home() {
           setShortUrl('');
           setAvailableColour('none');
           setLoading('none');
-          toast({
-            title: `URL Zipped successfully`,
-            status: 'success',
-            isClosable: true,
-            duration: 3000,
-            position: 'top'
-          });
+
+          Toaster({message:"URL Zipped successfully",typeOf:'success',positionOfToast:"top",toast:toast})
+
           // adding info to local storage
           setURLs(url1.url,url1.short_url);
           setResultLoading(false);
         }
         else{
-          toast({
-            title: `Please enter a valid URL`,
-            status: 'error',
-            isClosable: true,
-            duration: 3000,
-            position: 'top'
-          });
+          Toaster({message:"Please enter a valid URL",typeOf:'error',positionOfToast:"top",toast:toast})
           setResultLoading(false);
         }
       }
       else{
-        toast({
-          title: `Please enter a valid URL`,
-          status: 'error',
-          isClosable: true,
-          duration: 3000,
-          position: 'top'
-        });
+        Toaster({message:"Please enter a valid URL",typeOf:'error',positionOfToast:"top",toast:toast})
         setResultLoading(false);
       }
     } catch (error) {
@@ -102,11 +84,19 @@ export default function Home() {
     }
   };
 
-
+  //how to check that the name contains only alphabets and numbers
   const checkShortUrlName = debounce((name:string) => {
-    // Toster({message:"Checking availability of short url",typeOf:'success',positionOfToast:"top",toast:toast});
+    var pattern = /^[a-zA-Z0-9]+$/;
     if(name.length === 0){
       setLoading('none');
+    }
+    else if(name.length > 15 ){
+      Toaster({message:"Short url should be less than 15 characters",typeOf:'error',positionOfToast:"top",toast:toast})
+      setLoading('wrong');
+    }
+    else if(!isAlphaNumeric(name)){
+      Toaster({message:"Short url should contain only alphabets and numbers",typeOf:'error',positionOfToast:"top",toast:toast})
+      setLoading('wrong');
     }
     else{
       setLoading('loading');

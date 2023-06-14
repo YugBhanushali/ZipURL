@@ -1,4 +1,4 @@
-import { CheckIcon, InfoIcon } from '@chakra-ui/icons'
+import { InfoIcon } from '@chakra-ui/icons'
 import { Button, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverFooter, PopoverHeader, PopoverTrigger, Portal } from '@chakra-ui/react'
 import React from 'react'
 

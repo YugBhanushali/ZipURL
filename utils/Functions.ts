@@ -31,6 +31,12 @@ const debounce = (func: (...args: any[]) => void) => {
     return String(customAlphabet(Charactors, length)());
   }
 
+  export function isAlphaNumeric(str: string) {
+    var pattern = /^[a-zA-Z0-9]+$/;
+    return pattern.test(str);  // returns a boolean
+  };
+    
+
 
 const UrlCheckerFun = (url: string) => {
     let obj = {
@@ -67,7 +73,7 @@ const UrlCheckerFun = (url: string) => {
 type ToastType = "success" | "error" | "warning" | "info";
 
 
-const Toster = ({message,typeOf,positionOfToast="bottom",toast}:{message: string,typeOf:ToastType,positionOfToast:ToastPosition,toast:any}) => {
+const Toaster = ({message,typeOf,positionOfToast="bottom",toast}:{message: string,typeOf:ToastType,positionOfToast:ToastPosition,toast:any}) => {
 
   toast({
     title: message,
@@ -79,9 +85,27 @@ const Toster = ({message,typeOf,positionOfToast="bottom",toast}:{message: string
 
 }
 
-//what is Toaster is not a function?
-//how to make a function which will take the type of toast as argument and will return the toast function
+const UrlValidationForAnalytics = (url:string) => {
+  if(url.length === 0) {
+      // setUrlCheck(true);
+      return true;
+  }
+  if (isUrl(url)) {            
+      if(new URL(url).hostname === 'localhost' && new URL(url).protocol === 'http:' && new URL(url).pathname.split('/')[1].length > 0){
+          // setUrlCheck(true);
+          return true;
+      }
+      else{
+          // setUrlCheck(false);
+          return false;
+      }
+  }
+  else{
+      // setUrlCheck(false);
+      return false;
+  }
+}
 
 
 
-  export {debounce, UrlCheckerFun, Toster};
+  export {debounce, UrlCheckerFun, Toaster, UrlValidationForAnalytics};

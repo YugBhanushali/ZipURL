@@ -1,14 +1,13 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import isUrl from 'is-url';
 import { ChakraProvider, useToast,useMediaQuery } from '@chakra-ui/react';
 import { RotatingLines } from 'react-loader-spinner';
 import Link from 'next/link';
 import { formatDistanceToNow } from 'date-fns';
 import { motion } from 'framer-motion';
 import { URL_OF_WEBSITE } from '@/utils/constants';
-import Image from 'next/image';
-import { sliceURL } from '@/utils/Functions';
+import { Toaster, UrlValidationForAnalytics, sliceURL } from '@/utils/Functions';
+import RotatingLinesAnimation from '@/components/ui/RotatingLinesAnimation';
 
 
 export default function Home() {
@@ -21,32 +20,11 @@ export default function Home() {
     const [isMobileView] = useMediaQuery('(max-width: 768px)');
 
 
-
-    const urlValidation = (url:string) => {
-        if(url.length === 0) {
-            setUrlCheck(true);
-            return false;
-        }
-        if (isUrl(url)) {            
-            if(new URL(url).hostname === 'localhost' && new URL(url).protocol === 'http:' && new URL(url).pathname.split('/')[1].length > 0){
-                setUrlCheck(true);
-            }
-            else{
-                setUrlCheck(false);
-            }
-        }
-        else{
-            setUrlCheck(false);
-        }
-    }
-
     const fetchUrlData = async () => {
         const tempShortLink = new URL(shortLink).pathname.split('/')[1];
-        console.log(tempShortLink);
         const res = await fetch(`${URL_OF_WEBSITE}api/url?search=${tempShortLink}`);
 
         const data = await res.json();
-        console.log(data?.urls);
         if(data?.available === true){
             setUrlData(data?.urls);
             setLoading(false);
@@ -59,14 +37,7 @@ export default function Home() {
     const handleSubmit = (e:any) => {
         e.preventDefault();
         if(!urlCheck){
-            toast({
-                title: "URL is valid",
-                description: "Enter a valid URL to get analytics",
-                status: "error",
-                duration: 9000,
-                isClosable: true,
-                position:'top'
-            })
+            Toaster({message:'Enter a valid URL to get analytics',typeOf:'error',positionOfToast:'top',toast:toast});
         }
         else{
             setShowResults(true);
@@ -78,8 +49,10 @@ export default function Home() {
     }
 
     useEffect(() => {
-        urlValidation(shortLink);
-        console.log(urlData);
+
+        // UrlValidationForAnalytics is a function that checks if the url contains the domain as zipurl.vercel.app and protocol as https and pathname as /{shortlink}
+        setUrlCheck(UrlValidationForAnalytics(shortLink))
+
     }, [shortLink, urlCheck]);
   return (
     <ChakraProvider>
@@ -102,7 +75,7 @@ export default function Home() {
                             />
                         </div>
                         {/* <button type='submit' className='ml-4 h-[44px] bg-[#007dfa] text-white px-4 py-2 rounded-[10px]'>Get Analytics</button> */}
-                        <div className='flex mt-[30px] sm:mt-2 justify-center items-center'>
+                        <div className='flex mt-[20px] sm:mt-2 justify-center items-center'>
                             <button type="submit" className="text-black flex items-center  hover:text-white border-2 border-black hover:bg-black focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-[11px] sm:text-[16px] px-5 py-1.5 text-center sm:ml-4 mb-2 dark:border-gray-600 dark:text-black dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">
                                 {/* <Image src={LinkLogo} alt="zip it"  width={isMobileView ? 14 : 20} height={isMobileView ? 14 : 20} className='mr-2'/> */}
                                 Get Analytics
@@ -117,13 +90,7 @@ export default function Home() {
                             showResults
                             ?
                                 loading ?
-                                    <RotatingLines
-                                        strokeColor="grey"
-                                        strokeWidth="3"
-                                        animationDuration="1"
-                                        width={isMobileView ? "24" : "46"}
-                                        visible={true}
-                                    />
+                                    <RotatingLinesAnimation widthOfLines={isMobileView ? "24" : "46"} />
                                 :
                                     urlData !== null
                                     ?
@@ -148,7 +115,7 @@ export default function Home() {
                                             </div>
                                         </motion.div>
                                     :
-                                        <div className='text-[20px] font-bold'>
+                                        <div className='sm:text-[20px] text-[12px] font-bold'>
                                             <p>Zipped url not found. Try again</p>
                                         </div>
                             :

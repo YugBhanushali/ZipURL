@@ -3,7 +3,6 @@
 import { UrlContext } from '@/Context/UrlContext';
 import { removeURL } from '@/utils/localStorage';
 import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Toast, useDisclosure, useToast,useMediaQuery } from '@chakra-ui/react'
-import { is } from 'date-fns/locale';
 import React, {useContext, useEffect } from 'react'
 import { MdOutlineDeleteOutline } from 'react-icons/md';
 

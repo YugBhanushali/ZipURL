@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { RotatingLines } from "react-loader-spinner";
 import Link from "next/link";
 import { URL_OF_WEBSITE } from "@/utils/constants";
+import { useMediaQuery } from "@chakra-ui/react";
+import RotatingLinesAnimation from "@/components/ui/RotatingLinesAnimation";
 
 
 
@@ -13,6 +15,7 @@ export default function Home() {
 
     const [urlChecker, setUrlChecker] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
+    const [isMobileView] = useMediaQuery('(max-width: 768px)');
 
     const router = useRouter();
     const pathname = usePathname();
@@ -61,13 +64,7 @@ export default function Home() {
             {
                 loading ?
                     <div className='flex flex-col justify-center items-center mt-[120px] text-[25px] font-bold'>
-                        <RotatingLines
-                            strokeColor="grey"
-                            strokeWidth="3"
-                            animationDuration="1"
-                            width="46"
-                            visible={true}
-                        />
+                        <RotatingLinesAnimation widthOfLines={isMobileView ? "24" : "46" } />
                     </div>
                     :
                     urlChecker ?
