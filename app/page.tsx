@@ -86,7 +86,7 @@ export default function Home() {
   };
 
   //how to check that the name contains only alphabets and numbers
-  const checkShortUrlName = debounce((name:string) => {
+  const checkShortUrlName = debounce((name:string,) => {
     var pattern = /^[a-zA-Z0-9]+$/;
     if(name.length === 0){
       setLoading('none');
@@ -119,7 +119,7 @@ export default function Home() {
     }, 500);
 
     //use to make less api calls to check availability of short url
-    const optimizedCheck = useCallback(debounce(checkShortUrlName), []);
+    const optimizedCheck = useCallback(checkShortUrlName, []);
 
 
   useEffect(() => {

@@ -14,6 +14,8 @@
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@supabase/supabase-js": "^2.24.0",
+    "@types/file-saver": "^2.0.5",
+    "@types/is-url": "^1.2.30",
     "@types/node": "20.2.5",
     "@types/react": "18.2.7",
     "@types/react-dom": "18.2.4",

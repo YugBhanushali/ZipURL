@@ -11,17 +11,41 @@ export function sliceURL(url: string) {
     return url;
 }
 
-const debounce = (func: (...args: any[]) => void) => {
-    let timer: NodeJS.Timeout;
-    return function (...args: any[]) {
-      const context = this;
-      if (timer) clearTimeout(timer);
-      timer = setTimeout(() => {
-        timer = null;
-        func.apply(context, args);
-      }, 500);
-    };
+// const debounce = (func: (...args: any[]) => void) => {
+//     let timer: NodeJS.Timeout;
+//     return function (...args: any[]) {
+//       const context = this;
+//       if (timer) clearTimeout(timer);
+//       timer = setTimeout(() => {
+//         timer = null;
+//         func.apply(context, args);
+//       }, 500);
+//     };
+//   };
+
+// function debounce(func: (...args: any[]) => void, timeout = 300) {
+//     let timer: NodeJS.Timeout;
+//     return (...args: any[]) => {
+//       clearTimeout(timer);
+//       timer = setTimeout(() => {
+//         func.apply(this, args);
+//       }, timeout);
+//     };
+//   }
+
+const debounce = (func: (...args: any[]) => void, delay: number) => {
+  let timer: NodeJS.Timeout;
+
+  return (...args: any[]) => {
+    clearTimeout(timer);
+    
+    timer = setTimeout(() => {
+      func.apply(null, args);
+    }, delay);
   };
+};
+
+
 
   
   
