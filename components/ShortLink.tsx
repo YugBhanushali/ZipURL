@@ -45,7 +45,7 @@ const ShortLink = ({shortUrl,longUrl}:Props) => {
                         className={`${!isVisable ? "hidden": null} rounded-full bg-white flex justify-center items-center`}
                         onError={
                             () => {
-                                setSrc('https://avatar.vercel.sh/www.github.com')
+                                // setSrc('https://avatar.vercel.sh/www.github.com')
                                 setIsVisable(false)
                             }
                         }
