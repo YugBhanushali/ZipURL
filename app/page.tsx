@@ -35,7 +35,7 @@ export default function Home() {
     setResultLoading(true);
     let url1:urlData = {
       url:`${longUrl}`,
-      short_url: `${loading === 'right' ? ((shortUrl==='' || shortUrl.length >=10) ? generateRandomString(7) : shortUrl) : generateRandomString(7)}`,
+      short_url: `${loading === 'right' ? ((shortUrl==='' || shortUrl.length > 15) ? generateRandomString(7) : shortUrl) : generateRandomString(7)}`,
       created_at: new Date(),
       clicks:0
     }
