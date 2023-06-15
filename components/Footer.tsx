@@ -12,7 +12,7 @@ const Footer = () => {
   return (
     <>
         
-        <div className=" bg-white dark:bg-gray-900 w-full mt-[100px] ">
+        <div className=" bg-white w-full mt-[100px] ">
             <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
                 <div className="md:flex md:justify-between">
                 <div className="mb-6 md:mb-0">
@@ -36,21 +36,21 @@ const Footer = () => {
                 </Link>
                 </div>
                 <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-2">
-                        <a href="/stats/search" className="text-sm text-gray-500 hover:text-gray-900 dark:text-gray-400">
+                        <a href="/stats/search" className="text-sm text-gray-500 hover:text-gray-900 ">
                             <div>
-                                <h2 className="link link-underline link-underline-black mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Analytics</h2>
+                                <h2 className="link link-underline link-underline-black mb-6 text-sm font-semibold text-gray-900 uppercase ">Analytics</h2>
                             </div>
                         </a>
                     <div>
                     <a href="mailto:yug.h.bhanushali1@gmail.com" className="text-sm text-gray-500 hover:text-gray-900 dark:text-gray-400">
-                        <h2 className="link link-underline link-underline-black mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Feedback</h2>
+                        <h2 className="link link-underline link-underline-black mb-6 text-sm font-semibold text-gray-900 uppercase ">Feedback</h2>
                     </a>
                     </div>
                 </div>
             </div>
             <hr className="my-[10px] border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-6" />
             <div className="sm:flex sm:items-center sm:justify-between">
-                <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <Link href={URL_OF_WEBSITE} className="hover:underline">ZipURL</Link>. All Rights Reserved.
+                <span className="text-sm text-gray-500 sm:text-center ">© {(new Date).getFullYear()} <Link href={URL_OF_WEBSITE} className="hover:underline">ZipURL</Link>. All Rights Reserved.
                 </span>
                 <div className="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
                     <a href='https://twitter.com/TheYug03' className="text-gray-500 hover:[text-gray-900] dark:hover:text-white">
