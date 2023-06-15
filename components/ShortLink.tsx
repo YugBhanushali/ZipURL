@@ -36,13 +36,13 @@ const ShortLink = ({shortUrl,longUrl}:Props) => {
     <div className='mt-7 flex flex-row text-[20px] justify-start items-center sm:w-[550px] w-[350px] sm:h-[89px] h-[60px] bg-[#fffdfd] border-black border-[1.5px] sm:rounded-lg rounded-[7px] shadow-xl hover:scale-105 hover:transform transition-transform'>
         <div className='flex px-4 py-1 gap-2 items-center'>
             <div className='sm:w-[53px] rounded-full sm:h-[53px] w-[33px] h-[33px] bg-gradient-to-b from-gray-300 via-teal-300 to-purple-500 border'>
-                {src ? 
+                {isVisable ? 
                     <Image
                         src={src}
                         width={isMobileView ? 33 : 53}
                         height={isMobileView ? 33 : 53}
                         alt=''
-                        className={`${!isVisable ? "hidden": null} rounded-full bg-white flex justify-center items-center`}
+                        className={`rounded-full bg-white flex justify-center items-center`}
                         onError={
                             () => {
                                 // setSrc('https://avatar.vercel.sh/www.github.com')
