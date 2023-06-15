@@ -66,7 +66,7 @@ const ZipURLExapmle = [
     },
 ]
 
-const URL_OF_WEBSITE = "http://localhost:3000/"
+const URL_OF_WEBSITE = "https://zipurl.vercel.app/"
 // http://192.168.0.107:3000/
 // https://zipurl.vercel.app/
 

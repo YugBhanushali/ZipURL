@@ -13,6 +13,7 @@ import AllLink from '@/components/AllLink';
 import { URL_OF_WEBSITE } from '@/utils/constants';
 import LinkLogo from '../public/assets/Link.svg'
 import Image from 'next/image';
+import Footer from '@/components/Footer';
 
 
 
@@ -133,7 +134,7 @@ export default function Home() {
     
   return (
     <ChakraProvider>
-    <main className="mainpage flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="mainpage flex min-h-screen flex-col items-center justify-between pt-24">
       <div className='flex flex-col justify-center items-center'>
       <TagLines/>
       <form onSubmit={handleSubmit} className=''>
@@ -146,7 +147,7 @@ export default function Home() {
             boxShadow:{isMobileView} ? '0px 0.5px 8px -1px #000000' : '0px 0.5px 8px -1px #000000',
             borderRadius:'10px',
           }}
-          placeholder='https://github.com/supabase/supabase-flutter'
+          placeholder='https://github.com/Johndoe'
           required
         />
         
@@ -201,6 +202,7 @@ export default function Home() {
       <Animation/>
 
     </div>
+    <Footer/>
     </main>
     </ChakraProvider>
   )

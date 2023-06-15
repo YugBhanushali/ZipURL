@@ -15,7 +15,7 @@ const TagLines = () => {
   }, []);
 
   return (
-    <div className="tagline-slider mb-[100px] sm:w-[400px] w-[300px] sm:text-[20px] text-[13px]  justify-center items-center text-center">
+    <div className="tagline-slider mb-[100px] sm:w-[500px] w-[300px] sm:text-[20px] text-[13px]  justify-center items-center text-center">
       <motion.p
         key={currentTagline}
         initial={{ opacity: 0 }}

@@ -24,6 +24,8 @@ const nextConfig = {
             "media.cleanshot.cloud",
             "localhost.in",
             "supabase.com",
+            "cdn.buymeacoffee.com",
+            "api.producthunt.com",
         ],
     },
 }
