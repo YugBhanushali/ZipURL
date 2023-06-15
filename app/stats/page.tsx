@@ -9,6 +9,7 @@ import { motion } from 'framer-motion';
 import { useMediaQuery } from '@chakra-ui/react';
 import { sliceURL } from '@/utils/Functions';
 import RotatingLinesAnimation from '@/components/ui/RotatingLinesAnimation';
+import { URL_OF_WEBSITE } from '@/utils/constants';
 
 
 
@@ -22,7 +23,7 @@ export default function Home() {
 
     const fetchUrlData = async (search:string) => {
 
-        const res = await fetch(`http://localhost:3000/api/url?search=${search}`);
+        const res = await fetch(`${URL_OF_WEBSITE}api/url?search=${search}`);
 
         const data = await res.json();
         console.log(data?.urls);
@@ -76,7 +77,7 @@ export default function Home() {
                                 <p>Long url: <span className='text-[#5d79e9] '> {sliceURL(urlData.url)} </span></p>
                             </Link>
                             <Link href={`http://localhost:3000/${urlData.short_url}`}>
-                                <p>Short url: <span className='text-[#47de8d]'> https://localhost/{urlData.short_url} </span></p>
+                                <p>Short url: <span className='text-[#47de8d]'> {URL_OF_WEBSITE}{urlData.short_url} </span></p>
                             </Link>
                             <p>Number of clicks: {urlData.clicks}</p>
                             <p>Created {formatDistanceToNow(new Date(urlData.created_at))} ago</p>

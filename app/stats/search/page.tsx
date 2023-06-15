@@ -1,7 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import { ChakraProvider, useToast,useMediaQuery } from '@chakra-ui/react';
-import { RotatingLines } from 'react-loader-spinner';
 import Link from 'next/link';
 import { formatDistanceToNow } from 'date-fns';
 import { motion } from 'framer-motion';
@@ -108,7 +107,7 @@ export default function Home() {
                                                     <p>Long url: <span className='text-[#5d79e9]'> {sliceURL(urlData.url)} </span></p>
                                                 </Link>
                                                 <Link href={`${URL_OF_WEBSITE}${urlData.short_url}`}>
-                                                    <p>Short url: <span className='text-[#47de8d]'> https://localhost/{urlData.short_url} </span></p>
+                                                    <p>Short url: <span className='text-[#47de8d]'> {URL_OF_WEBSITE}{urlData.short_url} </span></p>
                                                 </Link>
                                                 <p>Number of clicks: {urlData.clicks}</p>
                                                 <p>Created {formatDistanceToNow(new Date(urlData.created_at))} ago</p>
