@@ -16,10 +16,6 @@ const Footer = () => {
             <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
                 <div className="md:flex md:justify-between">
                 <div className="mb-6 md:mb-0">
-                    {/* <Link href="https://flowbite.com/" className="flex items-center">
-                        <Image src="https://flowbite.com/docs/images/logo.svg" width={50} height={50} className="h-8 mr-3" alt="FlowBite Logo" />
-                        <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
-                    </Link> */}
                     <Link className='flex items-center' href='/'>
                         <Image 
                             src={LinkLogo}
@@ -42,12 +38,12 @@ const Footer = () => {
                 <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-2">
                         <a href="/stats/search" className="text-sm text-gray-500 hover:text-gray-900 dark:text-gray-400">
                             <div>
-                                <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Analytics</h2>
+                                <h2 className="link link-underline link-underline-black mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Analytics</h2>
                             </div>
                         </a>
                     <div>
                     <a href="mailto:yug.h.bhanushali1@gmail.com" className="text-sm text-gray-500 hover:text-gray-900 dark:text-gray-400">
-                        <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Feedback</h2>
+                        <h2 className="link link-underline link-underline-black mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Feedback</h2>
                     </a>
                     </div>
                 </div>
