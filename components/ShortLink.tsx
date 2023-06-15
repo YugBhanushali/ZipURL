@@ -9,6 +9,7 @@ import { BsCheckLg } from 'react-icons/bs'
 import ModalComp from './ModalComp'
 import { sliceURL } from '@/utils/Functions'
 import QrCode from './QrCode'
+import { URL_OF_WEBSITE } from '@/utils/constants'
 
 type Props = {
     shortUrl:string,
@@ -55,7 +56,7 @@ const ShortLink = ({shortUrl,longUrl}:Props) => {
             </div>
             {/* for url images */}
             <div>
-                <Link target='_blank' href={`http://localhost:3000/${shortUrl}`}>
+                <Link target='_blank' href={`${URL_OF_WEBSITE}${shortUrl}`}>
                     <p className='font-bold text-[black] sm:text-[17px] text-[12px]'>{`zipurl.vercel.app/${shortUrl}`}</p>
                 </Link>
                 <Link target='_blank' href={`${longUrl}`}>
@@ -79,7 +80,7 @@ const ShortLink = ({shortUrl,longUrl}:Props) => {
                                 color={'black'}
                                 className='cursor-pointer'
                                 onClick={() => {
-                                    navigator.clipboard.writeText(`http://localhost:3000/${shortUrl}`)
+                                    navigator.clipboard.writeText(`${URL_OF_WEBSITE}${shortUrl}`)
                                     toast({
                                         title: "Copied",
                                         description: "Your zipped url has been copied",
@@ -95,7 +96,7 @@ const ShortLink = ({shortUrl,longUrl}:Props) => {
                         }
                     </div>
                     <div className='h-[25px] w-[25px] sm:w-[37px] sm:h-[37px] sm:rounded-md rounded-[4px] cursor-pointer bg-[#e9e6e6] flex justify-center items-center hover:scale-[1.1] hover:bg-green-200'>
-                        <Link target='_blank' href={`http://localhost:3000/stats?shorturl=${shortUrl}`}>
+                        <Link target='_blank' href={`${URL_OF_WEBSITE}stats?shorturl=${shortUrl}`}>
                             <IoStatsChart
                                 height={isMobileView ? '11px' : '13px'}
                                 width={isMobileView ? '11px' : '13px'}
