@@ -3,27 +3,30 @@ import { CopyIcon } from '@chakra-ui/icons'
 import { useToast, useMediaQuery } from '@chakra-ui/react'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { use, useEffect } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import { IoStatsChart } from 'react-icons/io5'
 import { BsCheckLg } from 'react-icons/bs'
 import ModalComp from './ModalComp'
-import { sliceURL } from '@/utils/Functions'
+import { generateRandomString, sliceURL } from '@/utils/Functions'
 import QrCode from './QrCode'
 import { URL_OF_WEBSITE } from '@/utils/constants'
+
+
 
 type Props = {
     shortUrl:string,
     longUrl:string,
 }
 
-const ShortLink = ({shortUrl,longUrl}:Props) => {
-    const toast = useToast();
-    const [copied, setCopied] = React.useState(false);
-    const [src, setSrc] = React.useState(`https://www.google.com/s2/favicons?sz=128&domain_url=${longUrl}`);
-    const [isVisable, setIsVisable] = React.useState<boolean>(true);
+
+const ShortLink = ({shortUrl,longUrl}:Props) => {    const toast = useToast();
+    const [copied, setCopied] = useState(false);
+    const [src, setSrc] = useState(`https://www.google.com/s2/favicons?sz=128&domain_url=${longUrl}`);
     const [isMobileView] = useMediaQuery('(max-width: 768px)');
 
     let tempLongUrl = sliceURL(longUrl);
+
+   
 
     //after 3 seconds, set copied to false
     useEffect(() => {
@@ -31,29 +34,28 @@ const ShortLink = ({shortUrl,longUrl}:Props) => {
             setCopied(false)
         }
         , 4000)
+
+        setSrc(`https://www.google.com/s2/favicons?sz=128&domain_url=${longUrl}`);
+
     }, [copied])
+
+    
   return (
     <div className='mt-7 flex flex-row text-[20px] justify-start items-center sm:w-[550px] w-[350px] sm:h-[89px] h-[60px] bg-[#fffdfd] border-black border-[1.5px] sm:rounded-lg rounded-[7px] shadow-xl hover:scale-105 hover:transform transition-transform'>
         <div className='flex px-4 py-1 gap-2 items-center'>
             <div className='sm:w-[53px] rounded-full sm:h-[53px] w-[33px] h-[33px] bg-gradient-to-b from-gray-300 via-teal-300 to-purple-500 border'>
-                {
-                isVisable 
-                ? 
                 <>
                     <Image
                         src={src}
                         width={isMobileView ? 33 : 53}
                         height={isMobileView ? 33 : 53}
-                        alt='url'
+                        alt={'url'}
                         className={`rounded-full bg-white flex justify-center items-center`}
-                        onError={
-                            () => { setIsVisable(false) }
-                        }
+                        onErrorCapture={()=>{
+                            setSrc(`https://avatar.vercel.sh/${generateRandomString(7)}`);
+                        }}
                     />
                 </>
-                    :
-                    null
-                }
             </div>
             {/* for url images */}
             <div>
