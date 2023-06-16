@@ -64,12 +64,12 @@ export default function Home() {
                                 type="url"
                                 value={shortLink}
                                 onChange={(e) => setShortLink(e.target.value)}
-                                className={`sm:w-[499px] sm:h-[40px] w-[250px] h-[30px] sm:text-[16px] text-[12px] bg-white px-4 py-2 focus:outline-4 focus:outline-offset-[2px] ${urlCheck  ? `focus:outline-[#007dfa99]` : `focus:outline-red-500`} focus:outline border-none`}
+                                className={`sm:w-[499px] sm:h-[40px] w-[250px] h-[30px] sm:text-[16px] text-[12px] bg-white px-4 py-2 focus:outline-4 focus:outline-offset-[2px] ${urlCheck  ? `focus:outline-[#007dfa99]` : `focus:outline-red-500`} focus:outline border-[2px] sm:border-none`}
                                 style={{
                                     boxShadow:'0px 0.5px 8px -1px #000000',
                                     borderRadius:'10px',
                                 }}
-                                placeholder='https://localhost:3000/github'
+                                placeholder='https://zipurl.vercel.app/shortlink'
                                 required
                             />
                         </div>
