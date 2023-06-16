@@ -1,6 +1,6 @@
 'use client'
 import { CopyIcon } from '@chakra-ui/icons'
-import { useToast, useMediaQuery } from '@chakra-ui/react'
+import { useToast, useMediaQuery, useDisclosure } from '@chakra-ui/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { use, useEffect, useState } from 'react'
@@ -10,6 +10,7 @@ import ModalComp from './ModalComp'
 import { generateRandomString, sliceURL } from '@/utils/Functions'
 import QrCode from './QrCode'
 import { URL_OF_WEBSITE } from '@/utils/constants'
+import AnalyticsModal from './AnalyticsModal'
 
 
 
@@ -19,12 +20,17 @@ type Props = {
 }
 
 
-const ShortLink = ({shortUrl,longUrl}:Props) => {    const toast = useToast();
+const ShortLink = ({shortUrl,longUrl}:Props) => { 
+       
+    const toast = useToast();
     const [copied, setCopied] = useState(false);
     const [src, setSrc] = useState(`https://www.google.com/s2/favicons?sz=128&domain_url=${longUrl}`);
     const [isMobileView] = useMediaQuery('(max-width: 768px)');
+    const [imgLoading, setImgLoading] = useState(true);
 
     let tempLongUrl = sliceURL(longUrl);
+
+    const { isOpen, onOpen, onClose } = useDisclosure()
 
    
 
@@ -50,7 +56,10 @@ const ShortLink = ({shortUrl,longUrl}:Props) => {    const toast = useToast();
                         width={isMobileView ? 33 : 53}
                         height={isMobileView ? 33 : 53}
                         alt={'url'}
-                        className={`rounded-full bg-white flex justify-center items-center`}
+                        className={`rounded-full bg-white flex justify-center items-center ${imgLoading ? ' blur-lg' : ''} }`}
+                        onLoad={()=>{
+                            setImgLoading(false);
+                        }}
                         onErrorCapture={()=>{
                             setSrc(`https://avatar.vercel.sh/${generateRandomString(7)}`);
                         }}
@@ -60,7 +69,7 @@ const ShortLink = ({shortUrl,longUrl}:Props) => {    const toast = useToast();
             {/* for url images */}
             <div>
                 <Link target='_blank' href={`${URL_OF_WEBSITE}${shortUrl}`}>
-                    <p className='font-bold text-[black] sm:text-[17px] text-[12px]'>{`zipurl.vercel.app/${shortUrl}`}</p>
+                    <p className='font-bold text-[black] sm:text-[17px] text-[11px]'>{`zipurl.vercel.app/${shortUrl}`}</p>
                 </Link>
                 <Link target='_blank' href={`${longUrl}`}>
                     <p className='font-bold text-[#12120E4D] sm:text-[12px] text-[8px]'>{`${tempLongUrl}`}</p>
@@ -99,14 +108,23 @@ const ShortLink = ({shortUrl,longUrl}:Props) => {    const toast = useToast();
                         }
                     </div>
                     <div className='h-[25px] w-[25px] sm:w-[37px] sm:h-[37px] sm:rounded-md rounded-[4px] cursor-pointer bg-[#e9e6e6] flex justify-center items-center hover:scale-[1.1] hover:bg-green-200'>
-                        <Link target='_blank' href={`${URL_OF_WEBSITE}stats?shorturl=${shortUrl}`}>
+                        <AnalyticsModal
+                            isOpen={isOpen}
+                            onOpen={onOpen}
+                            onClose={onClose}
+                            shortUrl={shortUrl}
+                        >
                             <IoStatsChart
                                 height={isMobileView ? '11px' : '13px'}
                                 width={isMobileView ? '11px' : '13px'}
                                 color='black'
                                 className='cursor-pointer h-[13px] w-[13px] sm:h-[17px] sm:w-[17px]'
+                                onClick={() => {
+                                    onOpen();
+                                }
+                                }
                             />
-                        </Link>
+                        </AnalyticsModal>
                     </div>
                 </div>
                 <div className='flex sm:gap-2 gap-1'>

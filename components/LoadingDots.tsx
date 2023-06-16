@@ -7,6 +7,7 @@ const LoadingDots = ({ color = "#000" }: { color?: string }) => {
         <span style={{ backgroundColor: color }} />
         <span style={{ backgroundColor: color }} />
         <span style={{ backgroundColor: color }} />
+        <span style={{ backgroundColor: color }} />
       </span>
     );
   };

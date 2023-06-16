@@ -66,8 +66,9 @@ const ZipURLExapmle = [
     },
 ]
 
-const URL_OF_WEBSITE = "https://zipurl.vercel.app/"
-// http://192.168.0.107:3000/
-// https://zipurl.vercel.app/
+let Production = true;
+
+const URL_OF_WEBSITE =  Production ? "https://zipurl.vercel.app/" : "http://localhost:3000/";
+
 
 export { tagLineList, ZipURLExapmle, URL_OF_WEBSITE}
