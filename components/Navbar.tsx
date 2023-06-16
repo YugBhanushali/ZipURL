@@ -38,12 +38,13 @@ const Navbar = () => {
                 </Link>
             </div>
             <div className="flex items-center space-x-3">
-                {/* <div className="flex items-center">
-                    <GrProductHunt className="text-3xl"/>
-                </div> */}
-                {/* <div className="flex items-center">
-                    <SiBuymeacoffee className="text-3xl"/>
-                </div> */}
+                
+                <div className='flex ml-[10px]'>
+                    <a href="https://www.producthunt.com/posts/zipurl?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-zipurl" className='' target="_blank">
+                        <GrProductHunt className="text-3xl" color='#DA552F'
+                        />
+                    </a>
+                </div>
 
                 {/* for desktop view */}
                 <div className='hidden sm:block'>
@@ -58,19 +59,6 @@ const Navbar = () => {
                         <Image src={bmac} alt="Buy Me A Coffee" className='rounded-md' style={{height:'35px', width:'35px'}} />
                     </a>
                 </div>
-
-                <div className='flex sm:hidden ml-[10px]'>
-                    <a href="https://www.buymeacoffee.com/yugbhanushali" className='' target="_blank">
-                        <GrProductHunt className="text-3xl" color='#DA552F'
-                        />
-                    </a>
-                </div>
-
-                {/* <div className='flex'>
-                    <a href="https://www.producthunt.com/posts/code-to-image?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-code&#0045;to&#0045;image" target="_blank">
-                        <Image src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=386643&theme=light&peroiod=daily" alt="zipurl"  className='' width={250} height={40} />
-                    </a>
-                </div> */}
 
             </div>
         </div>
