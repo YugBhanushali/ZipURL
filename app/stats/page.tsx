@@ -26,7 +26,6 @@ export default function Home() {
         const res = await fetch(`${URL_OF_WEBSITE}api/url?search=${search}`);
 
         const data = await res.json();
-        console.log(data?.urls);
         if(data?.available === true){
             setUrlData(data?.urls);
         }
