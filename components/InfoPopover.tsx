@@ -14,7 +14,7 @@ const InfoPopover = () => {
                 <PopoverArrow bg={'gray.700'} />
                 <PopoverHeader>For short url</PopoverHeader>
                     <PopoverBody>
-                        <p>You can suggest the name for your short url but it should have max length 10</p>
+                        <p>You can suggest the name for your short url but it should have max length 15</p>
                         <p>If no names are available than we will assign you random name</p>
                     </PopoverBody>
             </PopoverContent>

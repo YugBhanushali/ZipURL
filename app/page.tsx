@@ -137,7 +137,7 @@ export default function Home() {
     <main className="mainpage flex min-h-screen flex-col items-center justify-between pt-24">
       <div className='flex flex-col justify-center items-center'>
       <TagLines/>
-      <form onSubmit={handleSubmit} className=''>
+      <form onSubmit={handleSubmit} className='sm:flex sm:flex-col sm:items-center flex flex-col'>
         <input
           type="url"
           value={longUrl}
@@ -152,7 +152,7 @@ export default function Home() {
         />
         
         
-        <div className='mt-[30px] sm:w-[497px]  flex items-center'>
+        <div className='mt-[30px] sm:w-[447px]  flex items-center'>
           <div 
           style={{
             boxShadow:'0px 0.5px 8px -1px #000000',
@@ -161,7 +161,7 @@ export default function Home() {
           className=' flex justify-start items-center h-[32px] sm:h-[42px] bg-white border-black border-[3px]'
           >
             <div className='h-full border-r-0 border-black bg-black px-3 py-2 flex justify-center items-center'>
-              <p className='text-white text-[11px] sm:text-[16px]'>{URL_OF_WEBSITE.split("/")[2]}</p>
+              <p className='text-white text-[11px] sm:text-[16px]'>{URL_OF_WEBSITE.split("/")[2]}/</p>
             </div>
             <div className='h-full w-full flex justify-center items-center'>
               <InputGroup border={'none'} >

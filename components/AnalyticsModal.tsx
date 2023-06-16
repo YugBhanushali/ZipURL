@@ -102,7 +102,7 @@ const AnalyticsModal = (
                                     <Link href={urlData.url} target='_blank'>
                                         <p>Long url: <span className='text-[#5d79e9] '> {sliceURL(urlData.url)} </span></p>
                                     </Link>
-                                    <Link href={`http://localhost:3000/${urlData.short_url}`} target='_blank'>
+                                    <Link href={`${URL_OF_WEBSITE}${urlData.short_url}`} target='_blank'>
                                         <p>Short url: <span className='text-[#47de8d]'> {URL_OF_WEBSITE}{urlData.short_url} </span></p>
                                     </Link>
                                     <p>Number of clicks: {urlData.clicks}</p>
