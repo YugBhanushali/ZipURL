@@ -2,6 +2,7 @@ import Navbar from '@/components/Navbar'
 import './globals.css'
 import { Roboto_Mono,JetBrains_Mono,Roboto_Condensed,Roboto_Flex } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react';
+import logo from './icon.png';
 
 
 
@@ -33,8 +34,7 @@ export const metadata = {
     { name: 'twitter:title', content: 'ZipURL' },
     { name: 'twitter:description', content: 'Get your zipped url with the name you want and track the analytics of your zipped url wiht few clicks. ZipURL is a free url shortener service which allows you to create short links for your long links and share them easily. Now shorten your links and make them more manageable.' },
     { name: 'twitter:image', content: '/icon.png' },
-  ]
-
+  ],
 }
 
 export default function RootLayout({
@@ -46,6 +46,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/icon.png" type="image/png" />
+        <link rel="shortcut icon" href="./icon.png" type="image/png" />
       </head>
       <body className={`${robotoMono.className} text-black`}>
         <Navbar />

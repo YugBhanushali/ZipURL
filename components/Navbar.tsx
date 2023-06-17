@@ -39,13 +39,6 @@ const Navbar = () => {
             </div>
             <div className="flex items-center space-x-3">
                 
-                <div className='flex ml-[10px]'>
-                    <a href="https://www.producthunt.com/posts/zipurl?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-zipurl" className='' target="_blank">
-                        <GrProductHunt className="text-3xl" color='#DA552F'
-                        />
-                    </a>
-                </div>
-
                 {/* for desktop view */}
                 <div className='hidden sm:block'>
                     <a href="https://www.buymeacoffee.com/yugbhanushali" target="_blank">
