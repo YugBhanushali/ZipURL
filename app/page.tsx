@@ -10,7 +10,7 @@ import Animation from '@/components/Animation';
 import { getURLs, setURLs } from '@/utils/localStorage';
 import { UrlContext } from '@/Context/UrlContext';
 import AllLink from '@/components/AllLink';
-import { URL_OF_WEBSITE } from '@/utils/constants';
+import { HOSTNAME, URL_OF_WEBSITE } from '@/utils/constants';
 import LinkLogo from '../public/assets/Link.svg'
 import Image from 'next/image';
 import Footer from '@/components/Footer';
@@ -161,7 +161,7 @@ export default function Home() {
           className=' flex justify-start items-center h-[32px] sm:h-[42px] bg-white border-black border-[3px]'
           >
             <div className='h-full border-r-0 border-black bg-black px-3 py-2 flex justify-center items-center'>
-              <p className='text-white text-[11px] sm:text-[16px]'>{URL_OF_WEBSITE.split("/")[2]}/</p>
+              <p className='text-white text-[11px] sm:text-[16px]'>{HOSTNAME}/</p>
             </div>
             <div className='h-full w-full flex justify-center items-center'>
               <InputGroup border={'none'} >
