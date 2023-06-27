@@ -1,9 +1,9 @@
-# zipURL
+# ZipURL
 
-![zipURL](./public/assets/zipurl-demo.png)
+![ZipURL](./public/assets/zipurl-demo.png)
 
 
-zipURL is an application that allows users to shorten their links and customize the short links to make them more understandable and memorable. It provides a convenient way to manage and share shorter, more user-friendly URLs.
+[ZipURL](https://zipurl.tech/) is an application that allows users to shorten their links and customize the short links to make them more understandable and memorable. It provides a convenient way to manage and share shorter, more user-friendly URLs.
 
 
 ## Features
@@ -16,7 +16,7 @@ zipURL is an application that allows users to shorten their links and customize 
 
 ## Installation
 
-To use zipURL, follow these steps:
+To use ZipURL, follow these steps:
 
 1. Clone the repository from GitHub: [https://github.com/YugBhanushali/ZipURL](https://github.com/YugBhanushali/ZipURL)
 
@@ -36,7 +36,7 @@ To use zipURL, follow these steps:
 ## Usage
 
 1. Shortening a URL:
-   - On the zipURL homepage, enter the long URL that you want to shorten in the provided input field.
+   - On the ZipURL homepage, enter the long URL that you want to shorten in the provided input field.
    - Before shortening your link you can suggest the name for your short link to make it more understandable and user friendly.
    - Click the "Zip it!" button. The application will generate a shortened link for you.
 
@@ -66,7 +66,7 @@ To use zipURL, follow these steps:
 
 ## Contributing
 
-Thank you for considering contributing to zipURL! If you have any suggestions, bug reports, or feature requests, please open an issue on the GitHub repository: [https://github.com/YugBhanushali/ZipURL](https://github.com/YugBhanushali/ZipURL)
+Thank you for considering contributing to ZipURL! If you have any suggestions, bug reports, or feature requests, please open an issue on the GitHub repository: [https://github.com/YugBhanushali/ZipURL](https://github.com/YugBhanushali/ZipURL)
 
 ## License
 
@@ -80,4 +80,4 @@ If you have any questions or need assistance, feel free to contact the author:
 - Email: yug.h.bhanushali1@gmail.com
 - GitHub: [https://github.com/YugBhanushali](https://github.com/YugBhanushali)
 
-Enjoy using zipURL!
+Enjoy using ZipURL!
