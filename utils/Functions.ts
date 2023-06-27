@@ -75,7 +75,7 @@ const UrlCheckerFun = (url: string) => {
     }
     if (isUrl(url)) {
       if(new URL(url).hostname.split('.').length > 1 && new URL(url).hostname.split('.')[1].length > 0){
-        if(new URL(url).hostname === 'zipurl.tech'){
+        if(new URL(url).hostname === 'zipurl.tech' || new URL(url).hostname === 'www.zipurl.tech' || new URL(url).hostname === 'zipurl.vercel.app'){
           // setOutlineCheck('none');
           obj.isUrlCorrect = false;
           obj.OuterColour = '4px solid red';
