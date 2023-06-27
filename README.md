@@ -1,35 +1,83 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# zipURL
 
-## Getting Started
+![zipURL](./public/assets/zipurl-demo.png)
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+zipURL is an application that allows users to shorten their links and customize the short links to make them more understandable and memorable. It provides a convenient way to manage and share shorter, more user-friendly URLs.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Shorten URLs: Users can input long URLs and generate shorter, more concise links.
+- Customizable short links: Users have the option to name their short links, making them more meaningful and easier to remember.
+- Link management: Users can view and manage their shortened links and can delete them too.
+- Analytics: Track the number of clicks for each shortened link.
+- QR code generation: Generate QR codes for the shortened links for easy sharing and scanning.
 
-## Learn More
+## Installation
 
-To learn more about Next.js, take a look at the following resources:
+To use zipURL, follow these steps:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Clone the repository from GitHub: [https://github.com/YugBhanushali/ZipURL](https://github.com/YugBhanushali/ZipURL)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+2. Install the dependencies by running the following command in the project directory:
+   ```shell
+   npm install
+   ```
 
-## Deploy on Vercel
+3. Start the development server with the following command:
+   ```shell
+   npm run dev
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. Access the application by opening the following URL in your web browser:
+   [https://zipurl.tech/](https://zipurl.tech/)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# url-shortner
+## Usage
+
+1. Shortening a URL:
+   - On the zipURL homepage, enter the long URL that you want to shorten in the provided input field.
+   - Before shortening your link you can suggest the name for your short link to make it more understandable and user friendly.
+   - Click the "Zip it!" button. The application will generate a shortened link for you.
+
+<!-- 2. Customizing a short link:
+   - After generating a shortened link, you have the option to customize it.
+   - Click the "Customize" button next to the shortened link.
+   - Enter your desired custom name for the link.
+   - Click the "Save" button. The link will be updated with your custom name. -->
+
+3. Managing shortened links:
+   - As user generate the short url all links are maintained at the homepage itself.
+   - You will see a list of your shortened links, along with options delete them.
+
+4. QR code generation:
+   - To generate a QR code for a shortened link, click the "QR Code" button next to the link.
+   - A QR code will be displayed, which you can download.
+
+## Technologies Used
+
+- Next.js: A React framework for server-rendered applications.
+- Chakra UI: A component library for building user interfaces.
+- Supabase: An open-source alternative to Firebase for backend services.
+- TypeScript: A typed superset of JavaScript.
+- Tailwind CSS: A utility-first CSS framework.
+- QRCode.react: A QR code generator component for React.
+- Other dependencies: lodash, nanoid, react-icons, react-loader-spinner, react-spinners, typewriter-effect, and more.
+
+## Contributing
+
+Thank you for considering contributing to zipURL! If you have any suggestions, bug reports, or feature requests, please open an issue on the GitHub repository: [https://github.com/YugBhanushali/ZipURL](https://github.com/YugBhanushali/ZipURL)
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
+
+## Contact
+
+If you have any questions or need assistance, feel free to contact the author:
+
+- Name: Yug Bhanushali
+- Email: yug.h.bhanushali1@gmail.com
+- GitHub: [https://github.com/YugBhanushali](https://github.com/YugBhanushali)
+
+Enjoy using zipURL!
