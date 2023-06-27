@@ -9,7 +9,7 @@ import { BsCheckLg } from 'react-icons/bs'
 import ModalComp from './ModalComp'
 import { generateRandomString, sliceURL } from '@/utils/Functions'
 import QrCode from './QrCode'
-import { URL_OF_WEBSITE } from '@/utils/constants'
+import { SHORT_WEBSITE_URL, URL_OF_WEBSITE } from '@/utils/constants'
 import AnalyticsModal from './AnalyticsModal'
 
 
@@ -69,7 +69,7 @@ const ShortLink = ({shortUrl,longUrl}:Props) => {
             {/* for url images */}
             <div>
                 <Link target='_blank' href={`${URL_OF_WEBSITE}${shortUrl}`}>
-                    <p className='font-bold text-[black] sm:text-[17px] text-[11px]'>{`zipurl.vercel.app/${shortUrl}`}</p>
+                    <p className='font-bold text-[black] sm:text-[17px] text-[11px]'>{`zipurl.tech/${shortUrl}`}</p>
                 </Link>
                 <Link target='_blank' href={`${longUrl}`}>
                     <p className='font-bold text-[#12120E4D] sm:text-[12px] text-[8px]'>{`${tempLongUrl}`}</p>
@@ -92,7 +92,7 @@ const ShortLink = ({shortUrl,longUrl}:Props) => {
                                 color={'black'}
                                 className='cursor-pointer'
                                 onClick={() => {
-                                    navigator.clipboard.writeText(`${URL_OF_WEBSITE}${shortUrl}`)
+                                    navigator.clipboard.writeText(`${SHORT_WEBSITE_URL}${shortUrl}`)
                                     toast({
                                         title: "Copied",
                                         description: "Your zipped url has been copied",

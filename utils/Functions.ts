@@ -115,7 +115,7 @@ const UrlValidationForAnalytics = (url:string) => {
       return true;
   }
   if (isUrl(url)) {            
-      if(new URL(url).hostname === 'zipurl.vercel.app' && new URL(url).protocol === 'https:' && new URL(url).pathname.split('/')[1].length > 0){
+      if(new URL(url).hostname.split(".")[1] === 'zipurl' && new URL(url).hostname.split(".")[2] === 'tech'  && new URL(url).protocol === 'https:' && new URL(url).pathname.split('/')[1].length > 0){
           // setUrlCheck(true);
           return true;
       }

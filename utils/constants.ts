@@ -68,8 +68,10 @@ const ZipURLExapmle = [
 
 let Production = true;
 
-const URL_OF_WEBSITE =  Production ? "https://zipurl.tech/" : "http://localhost:3000/";
+const URL_OF_WEBSITE =  Production ? "https://www.zipurl.tech/" : "http://localhost:3000/";
 
 const HOSTNAME = Production ? "zipurl.tech" : "localhost:3000";
 
-export { tagLineList, ZipURLExapmle, URL_OF_WEBSITE , HOSTNAME}
+const SHORT_WEBSITE_URL = Production ? "https://zipurl.tech/" : "http://localhost:3000/";
+
+export { tagLineList, ZipURLExapmle, URL_OF_WEBSITE , HOSTNAME , SHORT_WEBSITE_URL}
