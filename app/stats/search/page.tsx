@@ -69,7 +69,7 @@ export default function Home() {
                                     boxShadow:'0px 0.5px 8px -1px #000000',
                                     borderRadius:'10px',
                                 }}
-                                placeholder='https://zipurl.vercel.app/shortlink'
+                                placeholder='https://zipurl.tech/github'
                                 required
                             />
                         </div>

@@ -164,6 +164,7 @@ export default function Home() {
         title: "Update",
         description: (
           <div>
+            <p>
             We have updated our domain name to{" "}
             <a
               href="https://zipurl.tech"
@@ -171,9 +172,10 @@ export default function Home() {
             >
               zipurl.tech
             </a>{" "}
-            from zipurl.vercel.app. If you have made any past links, don't worry!
+            {`from zipurl.vercel.app. If you have made any past links, don't worry.
             They are live and you can access them from the new domain name as well
-            as from the old domain.
+            as from the old domain.`}
+            </p>
           </div>
         ),
         status: "info",
