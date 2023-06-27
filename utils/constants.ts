@@ -14,55 +14,55 @@ const tagLineList = [
 const ZipURLExapmle = [
     {
         longURL:"https://www.google.com/../../...?....",
-        shortURL:"https://zipurl.vercel.app/google",
+        shortURL:"https://zipurl.tech/google",
     },
     {
         longURL:"https://www.facebook.com/../../...?....",
-        shortURL:"https://zipurl.vercel.app/facebook",
+        shortURL:"https://zipurl.tech/facebook",
     },
     {
         longURL:"https://www.youtube.com/../../...?....",
-        shortURL:"https://zipurl.vercel.app/youtube",
+        shortURL:"https://zipurl.tech/youtube",
     },
     {
         longURL:"https://www.youtube.com/../../...?....",
-        shortURL:"https://zipurl.vercel.app/designYT",
+        shortURL:"https://zipurl.tech/designYT",
     },
     {
         longURL:"https://www.youtube.com/../../...?....",
-        shortURL:"https://zipurl.vercel.app/codingYT",
+        shortURL:"https://zipurl.tech/codingYT",
     },
     {
         longURL:"https://www.instagram.com/../../...?....",
-        shortURL:"https://zipurl.vercel.app/instagram",
+        shortURL:"https://zipurl.tech/instagram",
     },
     {
         longURL:"https://www.twitter.com/../../...?....",
-        shortURL:"https://zipurl.vercel.app/twitter",
+        shortURL:"https://zipurl.tech/twitter",
     },
     {
         longURL:"https://www.linkedin.com/../../...?....",
-        shortURL:"https://zipurl.vercel.app/linkedin",
+        shortURL:"https://zipurl.tech/linkedin",
     },
     {
         longURL:"https://www.pinterest.com/../../...?....",
-        shortURL:"https://zipurl.vercel.app/pinterest",
+        shortURL:"https://zipurl.tech/pinterest",
     },
     {
         longURL:"https://www.linkedin.com/../../...?....",
-        shortURL:"https://zipurl.vercel.app/myprofile",
+        shortURL:"https://zipurl.tech/myprofile",
     },
     {
         longURL:"https://medium.com/../../...?....",
-        shortURL:"https://zipurl.vercel.app/medium",
+        shortURL:"https://zipurl.tech/medium",
     },
     {
         longURL:"https://www.quora.com/../../...?....",
-        shortURL:"https://zipurl.vercel.app/quora",
+        shortURL:"https://zipurl.tech/quora",
     },
     {
         longURL:"https://medium.com/../../...?....",
-        shortURL:"https://zipurl.vercel.app/blogOnMarketing",
+        shortURL:"https://zipurl.tech/blogOnMarketing",
     },
 ]
 

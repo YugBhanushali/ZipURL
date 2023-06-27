@@ -25,7 +25,7 @@ export const metadata = {
     { name: 'og:title', content: 'ZipURL' },
     { name: 'og:description', content: 'Get your zipped url with the name you want and track the analytics of your zipped url wiht few clicks. ZipURL is a free url shortener service which allows you to create short links for your long links and share them easily. Now shorten your links and make them more manageable.' },
     { name: 'og:image', content: '/icon.png' },
-    { name: 'og:url', content: 'https://zipurl.vercel.app/' },
+    { name: 'og:url', content: 'https://zipurl.tech/' },
     { name: 'og:type', content: 'website' },
 
     { name: 'twitter:card', content: 'summary_large_image' },
