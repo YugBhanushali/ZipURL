@@ -74,11 +74,19 @@ const UrlCheckerFun = (url: string) => {
       return obj; 
     }
     if (isUrl(url)) {
-      if(new URL(url).hostname.split('.').length > 1 && new URL(url).hostname.split('.')[1].length > 0 && new URL(url).hostname !== 'zipurl.tech' ){
-        // setOutlineCheck('none');
-        obj.isUrlCorrect = true;
-        obj.OuterColour = 'none';
-        return obj;
+      if(new URL(url).hostname.split('.').length > 1 && new URL(url).hostname.split('.')[1].length > 0){
+        if(new URL(url).hostname !== 'zipurl.tech'){
+          // setOutlineCheck('none');
+          obj.isUrlCorrect = false;
+          obj.OuterColour = '4px solid red';
+          return obj;
+        }
+        else{
+          // setOutlineCheck('none');
+          obj.isUrlCorrect = true;
+          obj.OuterColour = 'none';
+          return obj;
+        }
       }
       else{
         // setOutlineCheck('4px solid red');
