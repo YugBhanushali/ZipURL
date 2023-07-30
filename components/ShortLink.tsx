@@ -69,7 +69,7 @@ const ShortLink = ({shortUrl,longUrl}:Props) => {
             {/* for url images */}
             <div>
                 <Link target='_blank' href={`${URL_OF_WEBSITE}${shortUrl}`}>
-                    <p className='font-bold text-[black] sm:text-[17px] text-[11px]'>{`zipurl.tech/${shortUrl}`}</p>
+                    <p className='font-bold text-[black] sm:text-[17px] text-[11px]'>{`zipurl.vercel.app/${shortUrl}`}</p>
                 </Link>
                 <Link target='_blank' href={`${longUrl}`}>
                     <p className='font-bold text-[#12120E4D] sm:text-[12px] text-[8px]'>{`${tempLongUrl}`}</p>
