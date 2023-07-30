@@ -70,7 +70,7 @@ let Production = true;
 
 const URL_OF_WEBSITE =  Production ? "https://zipurl.vercel.app/" : "http://localhost:3000/";
 
-const HOSTNAME = Production ? "zipurl.tech" : "localhost:3000";
+const HOSTNAME = Production ? "zipurl.vercel.app" : "localhost:3000";
 
 const SHORT_WEBSITE_URL = Production ? "https://zipurl.vercel.app/" : "http://localhost:3000/";
 
