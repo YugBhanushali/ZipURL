@@ -158,32 +158,32 @@ export default function Home() {
   const optimizedCheck = useCallback(checkShortUrlName, []);
 
   useEffect(() => {
-    if (firstRender) {
-      toast({
-        position: "top-right",
-        title: "Update",
-        description: (
-          <div>
-            <p>
-            We have updated our domain name to{" "}
-            <a
-              href="https://zipurl.tech"
-              className="underline"
-            >
-              zipurl.tech
-            </a>{" "}
-            {`from zipurl.vercel.app. If you have made any past links, don't worry.
-            They are live and you can access them from the new domain name as well
-            as from the old domain.`}
-            </p>
-          </div>
-        ),
-        status: "info",
-        duration: 12000,
-        isClosable: true,
-      });
-      setFirstRender(false);
-    }
+    // if (firstRender) {
+    //   toast({
+    //     position: "top-right",
+    //     title: "Update",
+    //     description: (
+    //       <div>
+    //         <p>
+    //         We have updated our domain name to{" "}
+    //         <a
+    //           href="https://zipurl.tech"
+    //           className="underline"
+    //         >
+    //           zipurl.tech
+    //         </a>{" "}
+    //         {`from zipurl.vercel.app. If you have made any past links, don't worry.
+    //         They are live and you can access them from the new domain name as well
+    //         as from the old domain.`}
+    //         </p>
+    //       </div>
+    //     ),
+    //     status: "info",
+    //     duration: 12000,
+    //     isClosable: true,
+    //   });
+    //   setFirstRender(false);
+    // }
 
     let tempData = getURLs().reverse();
     setUrlData(tempData);
