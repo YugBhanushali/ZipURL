@@ -33,7 +33,7 @@ export default function RootLayout({
 
         <meta property="og:title" content={metadata.title} />
         <meta property="og:description" content={metadata.description} />
-        <meta property="og:image" content={`${URL_OF_WEBSITE}assets/zipurl-demo.png`} />
+        <meta property="og:image" content={`${URL_OF_WEBSITE}assets/icon.png`} />
         <meta property="og:url" content="https://zipurl.vercel.app/" />
         <meta property="og:type" content="website" />
 
@@ -42,7 +42,7 @@ export default function RootLayout({
         <meta name="twitter:creator" content="@zipurl" />
         <meta name="twitter:title" content={metadata.title} />
         <meta name="twitter:description" content={metadata.description} />
-        <meta name="twitter:image" content={`${URL_OF_WEBSITE}assets/zipurl-demo.png`} />
+        <meta name="twitter:image" content={`${URL_OF_WEBSITE}assets/icon.png`} />
 
         <link rel="icon" href="/icon.png" type="image/png" />
         <link rel="shortcut icon" href="./icon.png" type="image/png" />
